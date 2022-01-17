@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="maintenance_request_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_request_view_tree_01</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree" position="replace">
+                <tree>
+                    <field name="name"/>
+                    <field name="company_request_num"/>
+                    <field name="project_num"/>
+                    <field name="equipment_id"/>
+                    <field name="request_date"/>
+                    <field name="customer_partner_id"/>
+                    <field name="customer_ref"/>
+                    <field name="request_type"/>
+                    <field name="major_flaw" options='{"no_create": True, "no_open": True}'/>
+                    <field name="flaw_origin" options='{"no_create": True, "no_open": True}'/>
+                    <field name="flaw_responsibility_id" options='{"no_create": True, "no_open": True}'/>
+                    <field name="consignment"/>
+                    <field name="ccrp"/>
+                    <field name="maintenance_type"/>
+                    <field name="equipment_group"/>
+                    <field name="equipment_subgroup"/>
+                    <field name="worker_ids" widget="many2many_tags"/>
+                    <field name="manager_id"/>
+                    <field name="schedule_date"/>
+                    <field name="end_date"/>
+                    <field name="priority"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="satisfied_customer_organization" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="comments_organization" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="satisfied_customer_intervention" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="comments_intervention" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="customer_maintenance_plan" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="domain_maintenance_plan" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="frequency_maintenance_plan" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                    <field name="comments_maintenance_plan" attrs="{'column_invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance_request_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_request_view_form_01</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='stage_id']" position="before">
+                <button string="Open All" name="open_all_ui" type="object" attrs="{'invisible': ['|', ('archive', '=', True), ('id', '=', False)]}"/>
+                <button string="Send Mail Preparation" name="send_mail_preparation" type="object" attrs="{'invisible': ['|', ('archive', '=', True), ('id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//sheet/*[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_customer_timesheet_tree" class="oe_stat_button" icon="fa-th" type="object" help="Customer Timesheet" attrs="{'invisible': ['|',('id', '=', False),('user_profile','!=', 'Hitachi')]}">
+                        <field string="Customer Timesheets" name="customer_timesheet_count" widget="statinfo"/>
+                    </button>
+                    <button name="action_internal_timesheet_tree" class="oe_stat_button" icon="fa-th" type="object" help="Internal Timesheet" attrs="{'invisible': ['|',('id', '=', False),('user_profile','!=', 'Hitachi')]}">
+                        <field string="Internal Timesheets" name="internal_timesheet_count" widget="statinfo"/>
+                    </button>
+                    <button name="action_maintenance_travel_tree" class="oe_stat_button" icon="fa-plane" type="object" help="Travel Arrangements" attrs="{'invisible': ['|',('id', '=', False),('user_profile','!=', 'Hitachi')]}">
+                        <field string="Travels" name="travels_count" widget="statinfo"/>
+                    </button>
+                    <button name="action_maintenance_tools_tree" class="oe_stat_button" icon="fa-wrench" type="object" help="Tools" attrs="{'invisible': ['|',('id', '=', False),('user_profile','!=', 'Hitachi')]}">
+                        <field string="Tools" name="tools_count" widget="statinfo"/>
+                    </button>
+                    <button name="action_maintenance_spare_parts_tree" class="oe_stat_button" icon="fa-cog" type="object" help="Spare Parts" attrs="{'invisible': ['|',('id', '=', False),('user_profile','!=', 'Hitachi')]}">
+                        <field string="Spare Parts" name="spare_parts_count" widget="statinfo"/>
+                    </button>
+                    <button name="action_detailed_report_work_done_tree" class="oe_stat_button" icon="fa-file" type="object" help="Detailed Report Work Done" attrs="{'invisible': [('id', '=', False)]}">
+                        <field string="Detailed Report Work Done" name="detailed_report_work_done_count" widget="statinfo" help="Detailed Report Work Done"/>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='equipment_id']" position="before">
+                <field name="company_request_num"/>
+                <field name="project_num"/>
+                <field name="internal_usage" attrs="{'invisible': [('user_profile','in', ['Client','Autre'])]}"/>
+                <field name="user_profile" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="bus_num" attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_tosa)d )]}"/>
+            </xpath>
+            <xpath expr="//field[@name='request_date']" position="after">
+                <field name="customer_partner_id"/>
+                <field name="customer_ref"/>
+                <field name="request_type"/>
+                <field name="major_flaw" options='{"no_create": True, "no_open": True}'/>
+                <field name="flaw_origin" options='{"no_create": True, "no_open": True}'/>
+                <field name="flaw_responsibility_id" options='{"no_create": True, "no_open": True}'/>
+                <field name="consignment"/>
+                <field name="ccrp"/>
+            </xpath>
+            <xpath expr="//field[@name='maintenance_type']" position="after">
+                <field name="equipment_group"/>
+                <field name="equipment_subgroup" context="{'default_equipment_group_id': equipment_group}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='maintenance_team_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="worker_ids" widget="many2many_tags" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+<!--                <field name="manager_id" options="{'no_create': True}"/>-->
+                <field name="company_type" invisible="1"/>
+                <field name="manager_id" string="Chef de projet" attrs="{'invisible': [('company_type', '=', 'TOSA')]}" options="{'no_create': True}"/>
+                <field name="manager_id" string="Interlocuteur Hitachi" attrs="{'invisible': [('company_type', '!=', 'TOSA')]}" options="{'no_create': True}" />
+                <field name="mailing_list_preparation_partner_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('user_profile','!=', 'Hitachi')]}"/>
+                <field name="mailing_list_work_report_partner_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('user_profile','!=', 'Hitachi')]}"/>
+                <field name="mailing_list_final_report_partner_ids" widget="many2many_tags" options="{'no_create': True}" />
+                <field name="mailing_list_payment_partner_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'invisible': [('user_profile','!=', 'Hitachi')]}"/>
+                <field name="sap_assignment_num" />
+                <field name="on_site_partner_ids">
+                    <tree>
+                        <field name="display_name" string="Name"/>
+                        <field name="phone" />
+                        <field name="email" />
+                    </tree>
+                </field>
+                <field name="working_location_partner_id"  />
+                <field name="working_location" string="" attrs="{'invisible' : [('working_location_partner_id', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='schedule_date']" position="after">
+                <field name="end_date" />
+            </xpath>
+
+            <xpath expr="//sheet/group" position="after">
+                    <group string="Organization feedback" name="organization_feedback"
+                           attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}">
+                        <field name="satisfied_customer_organization" />
+                        <field name="comments_organization"/>
+                    </group>
+                    <group string="Intervention feedback" name="intervention_feedback"
+                           attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}">
+                        <field name="satisfied_customer_intervention" />
+                        <field name="comments_intervention" />
+                    </group>
+                    <group string="Maintenance plan feedback" name="maintenance_plan_feedback"
+                           attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_traction)d )]}">
+                        <field name="customer_maintenance_plan" />
+                        <field name="domain_maintenance_plan" />
+                        <field name="frequency_maintenance_plan" />
+                        <field name="comments_maintenance_plan" />
+                    </group>
+
+
+            </xpath>
+
+            <xpath expr="//label[@for='duration']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='duration']/parent::div" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='description']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='email_cc']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <notebook>
+                    <page name="description" string="Work Description" >
+                        <field name="work_comment" />
+                    </page>
+                    <page name="electrical_consignment" string="Electrical Consignment" attrs="{'invisible': [('consignment', '=', False)]}">
+                        <field name="consignment_ids" context="{'default_maintenance_request_id': id}"/>
+                    </page>
+                    <page name="electrical_deconsignment" string="Electrical DeConsignment" attrs="{'invisible': [('consignment', '=', False)]}">
+                        <field name="deconsignment_ids" context="{'default_deconsignment_maintenance_request_id': id}"/>
+                    </page>
+                    <page name="security_attachment" string="Additional Security Document">
+                        <field name="security_document_ids" widget='many2many_binary'/>
+                    </page>
+                    <page name="take_five" string="Take 5">
+                        <field name="takefive_ids" context="{'default_takefive_maintenance_request_id': id}"/>
+                    </page>
+                    <page name="others_attachment" string="Other Documents">
+                        <field name="other_document_ids" widget='many2many_binary'/>
+                    </page>
+                    <page name="other" string="Archives" groups="base.group_system">
+                        <group name="other_main">
+                            <group name="attachment_recovery" string="Attachment Recovery">
+                                <field name="attachment_recovery_directory_path"/>
+                                <field name="has_attachment_recovery_directory" invisible="1"/>
+                                <div class="alert alert-warning" role="alert" col="2" attrs="{'invisible': [('has_attachment_recovery_directory', '=', True)]}">
+                                    <i class="fa fa-warning mr-2"/>
+                                    No such directory on system.
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="maintenance_request_view_search_01" model="ir.ui.view">
+        <field name="name">maintenance_request_view_search_01</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_search"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//filter[@name='my_maintenances']" position="after">
+                    <field name="internal_usage"/>
+                    <separator/>
+                    <filter string="Maintenance Requests" name="internal_usage_filter" domain="[('internal_usage', '!=', True)]"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="maintenance.hr_equipment_request_action" model="ir.actions.act_window">
+        <field name="context">{'default_user_id': uid, 'search_default_internal_usage_filter': 1}</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record model="res.partner" id="partner_generic">
+        <field name="name">Utilisateur Générique</field>
+        <field name="company_id" eval="False"/>
+        <field name="email">generic_user@abb.com</field>
+    </record>
+</odoo>

@@ -1,0 +1,177 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cap_survey_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-26 16:05+0000\n"
+"PO-Revision-Date: 2020-10-26 16:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cap_survey_report
+#: model:ir.actions.report,print_report_name:cap_survey_report.action_print_survey_report
+msgid "'Survey Report'"
+msgstr ""
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "ACTIVITY"
+msgstr "ACTIVITE"
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "ADDRESS"
+msgstr "ADRESSE"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_user_input_line__answer_type
+msgid "Answer Type"
+msgstr "Type de réponse"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_user_input_line__attachment_id
+#: model:ir.model.fields.selection,name:cap_survey_report.selection__survey_question__question_type__attachment
+#: model:ir.model.fields.selection,name:cap_survey_report.selection__survey_user_input_line__answer_type__attachment
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.attachment
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.view_attachment_field
+msgid "Attachment"
+msgstr "Pièce jointe"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "HITACHI ABB POWER GRIDS"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__id
+msgid "ID"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "Logo"
+msgstr ""
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "PREPARED"
+msgstr "PREPARATION"
+
+#. module: cap_survey_report
+#: model:ir.actions.report,name:cap_survey_report.action_print_survey_report
+msgid "Print Survey Report To PDF"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question__question
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__question_id
+msgid "Question"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question__question_type
+msgid "Question Type"
+msgstr "Type de question"
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "REQUEST NUMBER"
+msgstr "NUMERO INTERVENTION"
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.sign_field
+msgid "Reset"
+msgstr "Effacer"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__response_id
+msgid "Response"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_user_input_line__img_sign
+#: model:ir.model.fields.selection,name:cap_survey_report.selection__survey_question__question_type__sign
+#: model:ir.model.fields.selection,name:cap_survey_report.selection__survey_user_input_line__answer_type__sign
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.result_view_sign
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.signature
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.view_sign_field
+msgid "Signature"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model,name:cap_survey_report.model_survey_survey
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__survey_id
+msgid "Survey"
+msgstr "Sondage"
+
+#. module: cap_survey_report
+#: model:ir.model,name:cap_survey_report.model_survey_question
+msgid "Survey Question"
+msgstr "Question du sondage"
+
+#. module: cap_survey_report
+#: model:ir.model,name:cap_survey_report.model_survey_question_answer
+msgid "Survey Question Answer"
+msgstr ""
+
+#. module: cap_survey_report
+#: model:ir.model,name:cap_survey_report.model_survey_user_input_line
+msgid "Survey User Input Line"
+msgstr "Ligne de saisie pour l'utilisateur du sondage"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question__title
+msgid "Title"
+msgstr "Titre"
+
+#. module: cap_survey_report
+#: model:ir.model.fields,field_description:cap_survey_report.field_survey_question_answer__user_input_line_ids
+msgid "User Input Line"
+msgstr ""
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.sign_field
+msgid "img"
+msgstr "Image"
+
+#. module: cap_survey_report
+#: model_terms:ir.ui.view,arch_db:cap_survey_report.survey_print_pdf
+msgid "©Hitachi ABB Power Grids 2020. All rights reserved."
+msgstr ""

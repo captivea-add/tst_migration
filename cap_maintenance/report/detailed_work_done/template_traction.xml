@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="assets_common" name="cap_maintenance report" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+             <link rel='stylesheet' type="text/css" href="/cap_maintenance/static/src/css/report.css"/>
+        </xpath>
+    </template>
+
+    <!-- Traction -->
+    <template id="report_detailed_work_done_traction_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="obj">
+                <t t-call="cap_maintenance.external_layout_report">
+                    <t t-set="detailed_work_done_id" t-value="obj"/>
+                    <t t-set="maintenance_request_id" t-value="obj.maintenance_request_id"/>
+
+                    <!-- TITLE -->
+                    <h1 class="cap_centered" style="margin-top: 50px; margin-bottom: 50px;"><span t-field="detailed_work_done_id.report_title"/></h1>
+
+                    <!-- BODY -->
+                    <div style="width:auto;margin-left:0px;margin-right:0px">
+
+                        <!--   INTERVENTION  -->
+                        <t t-call="cap_maintenance.report_detailed_work_done_intervention_part"/>
+                        <br />
+
+                        <!--   CONCERNED UNIT  -->
+                        <table class="cap_table cap_bold_border extend cap_5_col" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="5"><span class="cap_section">Concerned Unit</span></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Transformer Serial Number</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id"  t-field="maintenance_request_id.equipment_id.name" />
+                                </td>
+                            </tr>
+                            <tr t-if="maintenance_request_id.equipment_group">
+                                <td class="cap_field">Group</td>
+                                <td colspan="4">
+                                    <span t-field="maintenance_request_id.equipment_group.name" />
+                                </td>
+                            </tr>
+                            <tr t-if="maintenance_request_id.equipment_subgroup">
+                                <td class="cap_field">Subgroup</td>
+                                <td colspan="4">
+                                    <span t-field="maintenance_request_id.equipment_subgroup.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Vendor</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Manufacturing Year</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id and maintenance_request_id.equipment_id.commissioning_year"
+                                          t-field="maintenance_request_id.equipment_id.commissioning_year" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Vehicle serial #</td>
+                                <td colspan="4">
+                                    <span t-field="detailed_work_done_id.vehicle_serial" />
+                                </td>
+                            </tr>
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="5"><span class="cap_section">Technical characteristics</span></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Power</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_puissance" />
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_puissance_unit" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Voltage level (HV)</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_voltage" />
+                                </td>
+                            </tr>
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="5"><span class="cap_section">Commercial information</span></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Warranty issue</td>
+                                <td colspan="4">
+                                    <span t-field="maintenance_request_id.request_type" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Rework hours document</td>
+                                <td colspan="4">
+                                    <span t-field="maintenance_request_id.company_request_num" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Project #</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_sap_project_num" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Account #</td>
+                                <td colspan="4">
+                                    <span t-field="maintenance_request_id.sap_assignment_num" />
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+
+                        <!--   WORK DESCRIPTION  -->
+                        <table class="cap_table cap_bold_border extend cap_5_col" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="3" style="width: 85% !important;"><span class="cap_section">Work Description</span></td>
+                                <td class="cap_field cap_padding_l">Performed by</td>
+                                <td class="cap_field cap_padding_l" style="width: 13% !important;">Date</td>
+                            </tr>
+                            <t t-foreach="detailed_work_done_id.traction_corrective_work_ids" t-as="traction_corrective_work_id">
+                                <tr>
+                                    <td colspan="3" style="width: 85% !important;"><span t-field="traction_corrective_work_id.corrective_work_done" /></td>
+                                    <td><span t-field="traction_corrective_work_id.worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                    <td style="width: 13% !important;"><span t-field="traction_corrective_work_id.date" t-options="{'widget': 'date'}" /></td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td class="cap_field">Oil Leakage</td>
+                                <td colspan="2">
+                                    <input t-if="detailed_work_done_id.is_oil_leakage" type="checkbox" checked="checked" disabled="disabled" />
+                                    <input t-else="" type="checkbox" disabled="disabled" />
+                                </td>
+                                <td><span t-field="detailed_work_done_id.oil_leakage_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.oil_leakage_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Location</td>
+                                <td colspan="4"><span t-field="detailed_work_done_id.oil_leakage_location" /></td>
+                            </tr>
+                        </table>
+                        <br />
+
+                        <table class="cap_table cap_bold_border extend cap_5_col" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="5"><span class="cap_section">Exchange of an accessory</span></td>
+                            </tr>
+                            <t t-foreach="detailed_work_done_id.accessories_used_ids" t-as="accessory_used_id">
+                                <tr>
+                                    <td><span t-field="accessory_used_id.accessory" /></td>
+                                    <td colspan="3"><span t-field="accessory_used_id.note" /></td>
+                                    <td>
+                                        <span class="cap_field">Old Serial Number</span><br/>
+                                        <span t-field="accessory_used_id.old_serial_no"/><br/>
+                                        <span class="cap_field">New Serial Number</span><br/>
+                                        <span t-field="accessory_used_id.new_serial_no"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <br />
+
+                        <table class="cap_table cap_bold_border extend cap_5_col" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="3" style="width: 60% !important;"><span class="cap_section">Work Description</span></td>
+                                <td class="cap_field cap_padding_l" >Performed by</td>
+                                <td style="width: 20% !important;" class="cap_field cap_padding_l" >Date</td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="5"><span class="cap_section">Degassing and oil top up</span></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="2">Oil Top up</td>
+                                <td colspan="1"><span t-field="detailed_work_done_id.oil_top_up_quantity"/>l</td>
+                                <td><span t-field="detailed_work_done_id.oil_top_up_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.oil_top_up_date" t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td  class="cap_field" colspan="3">Degassing</td>
+                                <td><span t-field="detailed_work_done_id.degassing_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.degassing_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="2">Pump Check up</td>
+                                <td colspan="1"><span t-field="detailed_work_done_id.pump_check_up_quantity"/>h</td>
+                                <td><span t-field="detailed_work_done_id.pump_check_up_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.pump_check_up_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="3">Oil tightness check</td>
+                                <td><span t-field="detailed_work_done_id.pump_check_up_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.pump_check_up_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="2">Duration</td>
+                                <td colspan="1"><span t-field="detailed_work_done_id.duration"/>h</td>
+                                <td><span t-field="detailed_work_done_id.duration_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.duration_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="2">Pressure</td>
+                                <td colspan="1"><span t-field="detailed_work_done_id.pressure"/>b</td>
+                                <td><span t-field="detailed_work_done_id.pressure_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.pressure_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field" colspan="3">Oil sampling</td>
+                                <td><span t-field="detailed_work_done_id.duration_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.duration_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Rework Completed</td>
+                                <td colspan="2">
+                                    <input t-if="detailed_work_done_id.is_rework_competed" type="checkbox" checked="checked" disabled="disabled" />
+                                    <input t-else="" type="checkbox" disabled="disabled" />
+                                </td>
+                                <td><span t-field="detailed_work_done_id.rework_competed_worker_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}' /></td>
+                                <td><span t-field="detailed_work_done_id.rework_competed_date"      t-options="{'widget': 'date'}" /></td>
+                            </tr>
+                            <tr style="page-break-after:always;">
+                                <td colspan="5">
+                                    <span class="cap_field">Note</span><br/>
+                                    <div class="cap_html_field" >
+                                        <p t-field="detailed_work_done_id.note"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+<!--                        &lt;!&ndash; PICTURES &ndash;&gt;-->
+<!--                        <t t-foreach="detailed_work_done_id.picture_attachment_ids" t-as="picture_attachment_id">-->
+<!--                            <t t-if="picture_attachment_id_index == 0">-->
+<!--                                <span class="cap_field">Pictures</span><br/>-->
+<!--                            </t>-->
+<!--                            <div style="page-break-after:always;" >-->
+<!--                                <t t-set="numero_photo" t-value="picture_attachment_id_index +1"/>-->
+<!--                                <div class="container-fluid text-center">Picture <span t-esc="numero_photo"/></div>-->
+<!--                                <div class="container-fluid text-center" t-field="picture_attachment_id.picture"-->
+<!--                                     t-options="{'widget': 'image'}"/>-->
+<!--                            </div>-->
+<!--                            <br/>-->
+<!--                        </t>-->
+                        <div style="page-break-after:always;"/>
+                        <table class="cap_table cap_bold_border extend" style="width: 100%;">
+                            <t t-foreach="detailed_work_done_id.picture_attachment_ids" t-as="picture_attachment_id">
+                                <tr style="page-break-after:always;">
+                                    <td style="page-break-inside:avoid;page-break-after:always;">
+                                        <t t-if="picture_attachment_id_index == 0">
+                                            <span class="cap_field">Pictures</span><br/>
+                                        </t>
+                                        <t t-set="numero_photo" t-value="picture_attachment_id_index +1"/>
+                                        <div class="container-fluid text-center">Picture <span t-esc="numero_photo"/></div>
+                                        <div class="container-fluid text-center" t-field="picture_attachment_id.picture" style="page-break-inside:avoid;" t-options="{'widget': 'image', 'alt-field': 'picture_name'}"/><br/>
+                                        <div class="container-fluid text-center"><span t-esc="picture_attachment_id.picture_note"/></div>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <br />
+
+                        <!--   SIGNATURES  -->
+                        <table class="cap_table cap_bold_border" style="width: 100%;">
+                            <tr>
+                                <td t-if="detailed_work_done_id.is_customer_signature_required" class="cap_field">Customer Signature</td>
+                                <td class="cap_field">Worker Signature</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.is_customer_signature_required">
+                                    <span t-field="detailed_work_done_id.customer_signature" t-options="{'widget': 'image'}"/>
+                                </td>
+                                <td>
+                                    <span t-field="detailed_work_done_id.worker_signature" t-options="{'widget': 'image'}"/>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+        string="Maintenance Detailed Work Done Report"
+        id="action_print_detailed_work_done_report_traction"
+        model="maintenance.detailed.report.work.done"
+        report_type="qweb-pdf"
+        name="cap_maintenance.report_detailed_work_done_traction_document"
+        file="cap_maintenance.report_detailed_work_done_traction_document"
+        print_report_name="'Maintenance Detailed Work Done Report'"
+        paperformat="cap_paperformat_maintenance_detailed_work_done"
+    />
+
+</odoo>

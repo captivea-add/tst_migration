@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="seq_tosa_company_request_num" model="ir.sequence">
+            <field name="name">TOSA Request Num</field>
+            <field name="code">maintenance.request</field>
+            <field name="prefix">TOSA/</field>
+            <field name="padding">10</field>
+        </record>
+        <record id="seq_traction_company_request_num" model="ir.sequence">
+            <field name="name">Traction Request Num</field>
+            <field name="code">maintenance.request</field>
+            <field name="prefix">TRAC/</field>
+            <field name="padding">10</field>
+        </record>
+        <record id="seq_puissance_company_request_num" model="ir.sequence">
+            <field name="name">Puissance Request Num</field>
+            <field name="code">maintenance.request</field>
+            <field name="prefix">PUIS/</field>
+            <field name="padding">10</field>
+        </record>
+
+    </data>
+</odoo>

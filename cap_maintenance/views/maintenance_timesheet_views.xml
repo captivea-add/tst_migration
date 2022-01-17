@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- FORM DEDICATED TO CUSTOMER TIMESHEETS -->
+    <record id="maintenance_timesheet_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_timesheet_view_form_01</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="View PDF"  type="object" name="action_preview_pdf" class="btn-primary" icon="fa-print"/>
+                    <button string="Send email"  type="object" name="action_send_mail" class="btn-primary" icon="fa-envelope"/>
+                    <button string="Notify Administrative Team"  type="object" name="action_send_administrative_mail" class="btn-primary" icon="fa-envelope" attrs="{'invisible': &quot;[('current_user_id', '!=', manager_id), ('current_user_id', '!=', %(cap_settings.user_generic)d)]&quot;}"/>
+                </header>
+                <sheet>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="total_hours" invisible="1"/>
+                    <field name="timesheet_type" invisible="1"/>
+                    <field name="current_user_id" invisible="1"/>
+                    <field name="manager_id" invisible="1"/>
+
+                    <group>
+                        <field name="worker_id" attrs="{'readonly': [('is_locked', '=', True)]}" required="1" force_save="1"/>
+                        <field name="start_date" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                        <field name="end_date" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                        <field name="extra_hours_management" attrs="{'readonly': [('is_locked', '=', True)]}" widget="radio" options="{'horizontal': true}" force_save="1"/>
+                    </group>
+
+                    <label for="timesheet_line_ids" attrs="{'readonly': [('is_locked', '=', True)]}" />
+                    <field name="timesheet_line_ids" nolabel="1" ref="maintenance_timesheet_line_view_tree_01" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+
+                    <label for="before_work_attachment_ids" />
+                    <field name="before_work_attachment_ids" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+
+                    <separator />
+                    <label for="comments" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                    <field name="comments" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+
+                    <label for="after_work_attachment_ids" />
+                    <field name="after_work_attachment_ids" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+
+                    <group>
+                        <field name="customer_missing" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                    </group>
+
+                    <div attrs="{'invisible':[('customer_missing', '=', True)]}">
+                        <group>
+                            <label for="customer_signature" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                        </group>
+                        <field name="customer_display_name" placeholder="Name" attrs="{'readonly': [('is_locked', '=', True)], 'required': [('customer_signature', '!=', False)]}" force_save="1" class="oe_inline"/><br/>
+                        <field name="customer_signature" widget="signature" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                    </div>
+
+                    <group>
+                        <label for="worker_signature" attrs="{'readonly': [('is_locked', '=', True), ('worker_signature', '=', True)]}"/>
+                    </group>
+                    <field name="worker_signature" widget="signature" attrs="{'readonly': [('is_locked', '=', True), ('worker_signature', '!=', False)]}" force_save="1"/>
+
+                    <group>
+                        <label for="supervisor_signature"/>
+                    </group>
+                    <field name="set_supervisor_signature_readonly" invisible="1"/>
+                    <field name="supervisor_signature" widget="signature" attrs="{'readonly': [('set_supervisor_signature_readonly', '=', True)]}"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- FORM DEDICATED TO INTERNAL TIMESHEETS -->
+    <record id="maintenance_timesheet_view_form_02" model="ir.ui.view">
+        <field name="name">maintenance_timesheet_view_form_02</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="View PDF"  type="object" name="action_preview_pdf" class="btn-primary" icon="fa-print"/>
+                    <button string="Send email"  type="object" name="action_send_mail" class="btn-primary" icon="fa-envelope" />
+                    <button string="Notify Administrative Team"  type="object" name="action_send_administrative_mail" class="btn-primary" icon="fa-envelope" attrs="{'invisible': &quot;[('current_user_id', '!=', manager_id), ('current_user_id', '!=', %(cap_settings.user_generic)d)]&quot;}"/>
+                </header>
+                <sheet>
+                    <field name="is_locked" invisible="1" force_save="1"/>
+                    <field name="total_hours" invisible="1"/>
+                    <field name="timesheet_type" invisible="1"/>
+                    <field name="current_user_id" invisible="1"/>
+                    <field name="manager_id" invisible="1"/>
+                    <field name="chf_currency_id" invisible="1"/>
+
+                    <group>
+                        <field name="worker_id" attrs="{'readonly': [('is_locked', '=', True)]}" required="1" force_save="1"/>
+                        <field name="start_date" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                        <field name="end_date" attrs="{'readonly': [('is_locked', '=', True)]}" force_save="1"/>
+                        <field name="extra_hours_management" attrs="{'readonly': [('is_locked', '=', True)]}" widget="radio" options="{'horizontal': true}" force_save="1"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Travel Allowance">
+                            <!-- Lunch allowance group -->
+                            <label for="lunch_allowance_total_amount" string="Lunch (Capped Allowance)"/>
+<!--                            <table style="text-align:center; border: 1px #adb5bd dashed;">-->
+                            <div style="margin-bottom: 20px;">
+                                <table style="text-align:center; border: 1px solid rgba(108, 117, 125, 0.3);">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25%; min-width: 100px;"><label for="lunch_allowance_currency_id" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="lunch_allowance_days" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="lunch_allowance_amount" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="lunch_allowance_total_amount" /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 10px;"><field name="lunch_allowance_currency_id" nolabel="1" class="oe_inline" options="{'no_create': True}" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="lunch_allowance_days" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="lunch_allowance_amount" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="lunch_allowance_total_amount" nolabel="1" class="oe_inline"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Diner allowance group -->
+                            <label for="diner_allowance_total_amount" string="Diner (Capped Allowance)"/>
+<!--                            <table style="text-align:center; border: 1px #adb5bd dashed;">-->
+                            <div style="margin-bottom: 20px;">
+                                <table style="text-align:center; border: 1px solid rgba(108, 117, 125, 0.3);">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25%; min-width: 100px;"><label for="diner_allowance_currency_id" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="diner_allowance_days" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="diner_allowance_amount" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="diner_allowance_total_amount" /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding-left: 10px;"><field name="diner_allowance_currency_id" nolabel="1" class="oe_inline" options="{'no_create': True}" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="diner_allowance_days" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="diner_allowance_amount" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="diner_allowance_total_amount" nolabel="1" class="oe_inline"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Night allowance group -->
+                            <label for="night_allowance_total_amount" string="Night (Capped Allowance or Attached Bills)"/>
+<!--                            <table style="text-align:center; border: 1px #adb5bd dashed;">-->
+                            <table style="text-align:center; border: 1px solid rgba(108, 117, 125, 0.3);">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%; min-width: 100px;"><label for="night_allowance_currency_id" /></th>
+                                        <th style="width: 25%; min-width: 100px;"><label for="night_allowance_days" /></th>
+                                        <th style="width: 25%; min-width: 100px;"><label for="night_allowance_amount" /></th>
+                                        <th style="width: 25%; min-width: 100px;"><label for="night_allowance_total_amount" /></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding-left: 10px;"><field name="night_allowance_currency_id" nolabel="1" class="oe_inline" options="{'no_create': True}" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                        <td><field name="night_allowance_days" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                        <td><field name="night_allowance_amount" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                        <td><field name="night_allowance_total_amount" nolabel="1" class="oe_inline"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </page>
+
+                        <page string="Special Allowances">
+                            <!-- Hard work Bonus group -->
+                            <label for="hard_work_bonus_total_amount" string="Hard work Bonus"/>
+                            <div style="margin-bottom: 20px;">
+                                <table style="text-align:center; border: 1px solid rgba(108, 117, 125, 0.3);">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25%; min-width: 100px;"><label for="hard_work_bonus_days" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="hard_work_bonus_amount" /></th>
+                                            <th style="width: 25%; min-width: 100px;"><label for="hard_work_bonus_total_amount" /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><field name="hard_work_bonus_days" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="hard_work_bonus_amount" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                            <td><field name="hard_work_bonus_total_amount" nolabel="1" class="oe_inline"/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Other country Bonus group -->
+                            <label for="other_country_bonus_total_amount" string="Other Country Bonus"/>
+                            <table style="text-align:center; border: 1px solid rgba(108, 117, 125, 0.3);">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%; min-width: 100px;"><label for="other_country_bonus_days" /></th>
+                                        <th style="width: 25%; min-width: 100px;"><label for="other_country_bonus_amount" /></th>
+                                        <th style="width: 25%; min-width: 100px;"><label for="other_country_bonus_total_amount" /></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><field name="other_country_bonus_days" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                        <td><field name="other_country_bonus_amount" nolabel="1" class="oe_inline" attrs="{'readonly': [('is_locked', '=', True)]}"/></td>
+                                        <td><field name="other_country_bonus_total_amount" nolabel="1" class="oe_inline"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </page>
+
+                        <page string="Logged Hours">
+                            <field name="timesheet_line_ids" nolabel="1" ref="maintenance_timesheet_line_view_tree_01" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                        </page>
+
+                        <page string="Expenses">
+                            <group col="8">
+                                <field name="allowance_per_km" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                                <field name="total_kms" />
+                                <field name="allowance_total_kms_amount" />
+                            </group>
+                            <field name="maintenance_expense_ids" nolabel="1" context="{'tree_view_ref': 'cap_maintenance.maintenance_expense_view_tree_01' }" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                        </page>
+
+                        <page string="Comments">
+                            <field name="comments" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                        </page>
+                    </notebook>
+
+                    <group>
+                        <label for="worker_signature" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+                    </group>
+                    <field name="worker_signature" widget="signature" attrs="{'readonly': [('is_locked', '=', True)]}"/>
+
+                    <group>
+                        <label for="supervisor_signature"/>
+                    </group>
+                    <field name="set_supervisor_signature_readonly" invisible="1"/>
+                    <field name="supervisor_signature" widget="signature" attrs="{'readonly': [('set_supervisor_signature_readonly', '=', True)]}"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE DEDICATED TO CUSTOMER TIMESHEETS -->
+    <record id="maintenance_timesheet_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_timesheet_view_tree_01</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <tree string="Maintenance Timesheets">
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="worker_id" />
+                <field name="total_hours" />
+                <field name="total_kms" />
+                <field name="is_signed" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- TREE DEDICATED TO INTERNAL TIMESHEETS -->
+    <record id="maintenance_timesheet_view_tree_02" model="ir.ui.view">
+        <field name="name">maintenance_timesheet_view_tree_02</field>
+        <field name="model">maintenance.timesheet</field>
+        <field name="arch" type="xml">
+            <tree string="Maintenance Timesheets">
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="worker_id" />
+                <field name="total_hours" />
+                <field name="total_kms" />
+                <field name="expenses_count" />
+                <field name="is_email_sent" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- TREE for timesheet line -->
+    <record id="maintenance_timesheet_line_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_timesheet_line_view_tree_01</field>
+        <field name="model">maintenance.timesheet.line</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1" create="0" delete="0" editable="bottom" >
+                <field name="sequence" force_save="1" />
+                <field name="regular_hours"                 widget="float_time"/>
+                <field name="travelling_hours"              widget="float_time"/>
+                <field name="waiting_hours"                 widget="float_time"/>
+                <field name="extra_hours"                   widget="float_time"/>
+                <field name="night_hours"                   widget="float_time"/>
+                <field name="extra_night_and_holiday_hours" widget="float_time"/>
+                <field name="total_hours"                   widget="float_time"/>
+                <field name="kilometers"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- TREE for expenses -->
+    <record id="maintenance_expense_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_expense_view_tree_01</field>
+        <field name="model">maintenance.expense</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="description" />
+                <field name="amount"/>
+                <field name="currency_id" />
+                <field name="attachment" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for expenses -->
+    <record id="maintenance_expense_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_expense_view_form_01</field>
+        <field name="model">maintenance.expense</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="currency_id" invisible="1"/>
+
+                <group>
+                    <field name="description" />
+                    <field name="amount" />
+                    <field name="attachment" />
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_maintenance_timesheet">
+        <field name="name">Timesheets</field>
+        <field name="res_model">maintenance.timesheet</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="maintenance_timesheet_view_tree_01"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            Nothing registered yet.
+          </p>
+        </field>
+    </record>
+
+</odoo>

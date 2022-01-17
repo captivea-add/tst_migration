@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cap_model_copy
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-03 17:17+0000\n"
+"PO-Revision-Date: 2020-04-03 17:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__number_of_copy
+msgid "Additional copies"
+msgstr "Copies supplémentaires"
+
+#. module: cap_model_copy
+#: model_terms:ir.ui.view,arch_db:cap_model_copy.wizard_several_copy_view_form_01
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: cap_model_copy
+#: code:addons/cap_model_copy/models/wizard_several_copy.py:0
+#, python-format
+msgid ""
+"Copying record(s) less than 1 times makes no sens. Please fix it or cancel."
+msgstr "Il n'est pas possible de faire moins qu'une copie de(s) enregistrement(s). Veuillez corriger ou annuler l'opération."
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_model_several_copy__display_name
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.actions.act_window,name:cap_model_copy.action_view_wizard_several_copy
+msgid "Duplicate Several Times"
+msgstr "Duplication multiple"
+
+#. module: cap_model_copy
+#: model_terms:ir.ui.view,arch_db:cap_model_copy.wizard_several_copy_view_form_01
+msgid "Execute"
+msgstr "Valider"
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_model_several_copy__id
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__id
+msgid "ID"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_model_several_copy____last_update
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model.fields,field_description:cap_model_copy.field_wizard_several_copy__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model,name:cap_model_copy.model_model_several_copy
+msgid "Model Copy"
+msgstr ""
+
+#. module: cap_model_copy
+#: model:ir.model,name:cap_model_copy.model_wizard_several_copy
+msgid "Wizard Several Copies At Once"
+msgstr "Wizard de duplication multiple"

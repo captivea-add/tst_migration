@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_partner_form_01">
+        <field name="name">view_partner_form_01</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//field[@name='parent_id']/parent::div" position="after">
+                <group>
+                    <field name="user_ids" invisible="1" />
+                    <field name="matricule" attrs="{'invisible': ['|', ('user_ids', '=', []), ('is_company', '=', True)]}" class="oe_inline" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

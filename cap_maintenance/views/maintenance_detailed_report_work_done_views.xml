@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for detailed report work done -->
+    <record id="maintenance_detailed_report_work_done_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_detailed_report_work_done_view_tree_01</field>
+        <field name="model">maintenance.detailed.report.work.done</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="start_date" />
+                <field name="end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for detailed report work done -->
+    <record id="maintenance_detailed_report_work_done_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_detailed_report_work_done_view_form_01</field>
+        <field name="model">maintenance.detailed.report.work.done</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="View PDF"  type="object" name="action_preview_pdf" class="btn-primary" icon="fa-print" />
+                    <button string="Send email"  type="object" name="action_send_mail" class="btn-primary" icon="fa-envelope"/>
+                </header>
+                <sheet>
+                    <field name="company_id" invisible="1"/>
+                    <field name="company_type" invisible="1"/>
+                    <field name="manager_id" invisible="1"/>
+                    <field name="is_signed" invisible="1"/>
+
+                    <group>
+                        <group>
+                            <field name="report_date" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                            <field name="report_lang" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                            <field name="author" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                            <field name="document_num" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                            <field name="document_revision" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group>
+                            <field name="start_date" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                            <field name="end_date" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        </group>
+                    </group>
+
+                    <!-- Champs spécifiques Traction-->
+                    <group attrs="{'invisible': [('company_type', '!=', 'TOSA')]}">
+                        <group>
+                            <field name="vehicle_serial" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        </group>
+                        <label for="traction_corrective_work_ids"/>
+                        <newline/><field name="traction_corrective_work_ids" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+
+                        <newline/><label for="accessories_used_ids"/>
+                        <newline/><field name="accessories_used_ids" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+
+                        <newline/>
+                        <table cellpadding="8">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 400px;" colspan="2">Work Done</th>
+                                    <th style="min-width: 200px;">Performed by</th>
+                                    <th style="min-width: 200px;">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Oil Leakage</td>
+                                    <td><field name="is_oil_leakage" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="oil_leakage_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="oil_leakage_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Oil Top up</td>
+                                    <td><field name="oil_top_up_quantity" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/><span>l</span></td>
+                                    <td><field name="oil_top_up_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="oil_top_up_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td colspan="3"><field name="oil_leakage_location" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Degassing</td>
+                                    <td><field name="degassing_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="degassing_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Pump Check up</td>
+                                    <td><field name="pump_check_up_quantity" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/><span>h</span></td>
+                                    <td><field name="pump_check_up_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="pump_check_up_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Oil tightness check</td>
+                                    <td><field name="oil_tightness_check_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="oil_tightness_check_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Duration</td>
+                                    <td><field name="duration" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/><span>h</span></td>
+                                    <td><field name="duration_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="duration_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Pressure</td>
+                                    <td><field name="pressure" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/><span>b</span></td>
+                                    <td><field name="pressure_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="pressure_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Oil sampling</td>
+                                    <td><field name="oil_sampling_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="oil_sampling_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Rework Completed</td>
+                                    <td><field name="is_rework_competed" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="rework_competed_worker_id" class="oe_inline" options="{'no_open': True, 'no_create': True}" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                    <td><field name="rework_competed_date" class="oe_inline" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </group>
+                    <group attrs="{'invisible': [('company_type', '!=', %(cap_settings.company_traction)d)]}">
+                        <label for="note" string="Comments"/>
+                        <field name="note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                        <field name="picture_attachment_ids" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                        <field name="is_customer_signature_required" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <field name="customer_signature" widget="signature" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)], 'invisible': [('is_customer_signature_required', '=', False)], 'required': [('is_customer_signature_required', '=', True)]}"/>
+                        <field name="worker_signature" widget="signature" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                    </group>
+
+                    <!-- Champs spécifiques Puissance-->
+                    <group attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_puissance)d)]}">
+                        <!-- Descriptif des travaux prévus -->
+                        <h1>Work To Be Done</h1>
+                        <newline/><h4>(Not modifiable here, go back to the intervention request if you wish to modify it)</h4>
+                        <newline/><field name="work_description" nolabel="1" attrs="{'readonly': [('is_signed', '=', True)]}"/>
+
+                        <!-- Travaux réalisés et photos -->
+                        <newline/><h1>Work Done</h1>
+                        <newline/><field name="work_done_description" nolabel="1" attrs="{'readonly': [('is_signed', '=', True)]}"/>
+                        <newline/><field name="standard_project_photos" nolabel="1" attrs="{'readonly': [('is_signed', '=', True)]}"/>
+
+                        <newline/><label for="work_done_section_1_image"/>
+                        <newline/><field name="work_done_section_1_image" widget="image" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><field name="work_done_section_1_note" placeholder="Note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><label for="work_done_section_2_image"/>
+                        <newline/><field name="work_done_section_2_image" widget="image" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><field name="work_done_section_2_note" placeholder="Note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><label for="work_done_section_3_image"/>
+                        <newline/><field name="work_done_section_3_image" widget="image" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><field name="work_done_section_3_note" placeholder="Note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><label for="work_done_section_4_image"/>
+                        <newline/><field name="work_done_section_4_image" widget="image" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><field name="work_done_section_4_note" placeholder="Note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><label for="work_done_section_5_image"/>
+                        <newline/><field name="work_done_section_5_image" widget="image" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <newline/><field name="work_done_section_5_note" placeholder="Note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+
+                        <!-- Actions correctives à prévoir -->
+                        <newline/><h1>Corrective Work To Plan</h1>
+                        <newline/><field name="corrective_work_to_plan" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+
+                        <!-- Actions préventives à prevoir -->
+                        <newline/><h1>Preventive Work To Plan</h1>
+                        <newline/><field name="preventive_work_to_plan" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+
+                        <!-- Remarques -->
+                        <newline/><h1><label for="note" string="Comments"/></h1>
+                        <newline/>
+                        <field name="note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+                    <group attrs="{'invisible': [('company_id', '!=', %(cap_settings.company_puissance)d)]}">
+                        <field name="picture_attachment_ids" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_puissance)d)]}" />
+                        <field name="is_customer_signature_required"  attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}"/>
+                        <field name="customer_signature" widget="signature" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)], 'invisible': [('is_customer_signature_required', '=', False)], 'required': [('is_customer_signature_required', '=', True)]}"/>
+                        <field name="worker_signature" widget="signature"  attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+
+                    <!-- Champs spécifiques TOSA-->
+                    <group attrs="{'invisible': [('company_type', '!=', 'TOSA')]}">
+                        <label for="issue_description"/>
+                        <newline/><span class="text-muted">(Precise what has triggered the activity and the n° of bus or substation)</span>
+                        <newline/><field name="issue_description"     nolabel="1"  attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+                    <group attrs="{'invisible': [('company_type', '!=', 'TOSA')]}">
+                        <label for="corrective_work_done"/>
+                        <newline/><span class="text-muted">(Precise the status -incl. software version- before and at the end of the activities)</span>
+                        <newline/><field name="corrective_work_done"  nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+                    <group attrs="{'invisible': [('company_type', '!=', 'TOSA')]}">
+                        <label for="validation_work_done"/>
+                        <newline/><span class="text-muted">(Precise how the modifications were validated before to put back into service)</span>
+                        <newline/><field name="validation_work_done"  nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+                    <group attrs="{'invisible': [('company_type', '!=', 'TOSA')]}">
+                        <label for="note" string="Comments (pay attention will be not printed on the report)"/>
+                        <field name="note" nolabel="1" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                        <field name="picture_attachment_ids" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                        <field name="is_customer_signature_required" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                        <field name="customer_signature" widget="signature" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)], 'invisible': [('is_customer_signature_required', '=', False)], 'required': [('is_customer_signature_required', '=', True)]}"/>
+                        <field name="worker_signature" widget="signature" attrs="{'readonly': [('is_signed', '=', True), ('company_id', '!=', %(cap_settings.company_traction)d)]}" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_detailed_report_work_done">
+        <field name="name">Detailed Report Work Done</field>
+        <field name="res_model">maintenance.detailed.report.work.done</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="maintenance_detailed_report_work_done_view_tree_01"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            Nothing registered yet.
+          </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,80 @@
+table {
+    padding:-15px;
+}
+td,th, .cap_padding_l {
+    padding-left : 5px !important;
+}
+
+.td_noborder {
+    border : 0px;
+}
+.td_padding{
+    padding : 15px;
+}
+
+.h5_shut_margintop{
+    padding-top : -15px !important;
+    margin-top : -15px !important;
+}
+
+.cap_centered {
+    text-align: center;
+}
+
+.cap_field {
+    font-weight: bold;
+}
+
+.colored_background td {
+    background-color: lightgrey;
+    margin-block-end: auto;
+    margin-block-start: auto;
+    padding: unset;
+    margin: unset;
+}
+.cap_section {
+    padding-left: 5px;
+    font-size: 23.49px;
+    font-weight: normal;
+}
+
+.cap_summary_line {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-indent: 20px;
+}
+
+.cap_html_field {
+    text-indent: 10px !important;
+    margin-right: 10px; !important;
+}
+
+.cap_table {
+    table-layout: fixed;
+    page-break-inside: avoid; /* used by wkhtmltopdf */
+}
+
+.avoid_split {
+    page-break-inside: avoid; /* used by wkhtmltopdf */
+}
+
+.force_split {
+    page-break-after: always; /* used by wkhtmltopdf */
+}
+
+.cap_3_col td{ width: 33%; }
+.cap_5_col td{ width: 20%; }
+
+.cap_border{ border:1px solid black; }
+.cap_border.extend td, .cap_bold_border.extend td { border:1px solid black; }
+
+.cap_bold_border { border: 2px black solid; }
+.cap_bottom_border { border-bottom: 1px black solid; }
+
+.safe_html img {
+    /*max-width: -webkit-fill-available;*/
+    max-width: 95%;
+    height: auto;
+    /*vertical-align: middle;*/
+    border-style: none;
+}

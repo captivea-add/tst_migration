@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.rule" id="maintenance_hitachi_profile_contact_rule_01">
+            <field name="name">Hide Contact</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[("user_id", "!=", False)]</field>
+            <field name="active" eval="True"/>
+            <field name="groups" eval="[(4, ref('cap_maintenance.group_profile_client')),(4, ref('cap_maintenance.group_profile_partenaire')),(4, ref('cap_maintenance.group_profile_autre'))]"/>
+        </record>
+
+    </data>
+</odoo>

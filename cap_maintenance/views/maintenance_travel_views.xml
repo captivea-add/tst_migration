@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- TREE for travel arrangements -->
+    <record id="maintenance_travel_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_travel_view_tree_01</field>
+        <field name="model">maintenance.travel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"              />
+                <field name="create_date"       string="Create Date"/>
+                <field name="is_hotel"          width="0.5"/>
+                <field name="is_company_car"    width="0.5"/>
+                <field name="is_chsec"          width="0.5"/>
+                <field name="is_car_rental"     width="0.5"/>
+                <field name="is_flight"         width="0.5"/>
+                <field name="trip_additionnal_info" />
+                <field name="has_attachment" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for travel arrangements -->
+    <record id="maintenance_travel_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_travel_view_form_01</field>
+        <field name="model">maintenance.travel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title" attrs="{'invisible': [('id', '=', False)]}">
+                        <h3>
+                            <field name="name" />
+                        </h3>
+                    </div>
+                    <group>
+                        <group col="4" colspan="2">
+                            <!-- Hotel block -->
+                            <field name="is_hotel" />
+                            <newline/>
+                            <field name="hotel_date_from" attrs="{'invisible': [('is_hotel', '=', False)]}"/>
+                            <field name="hotel_date_to" attrs="{'invisible': [('is_hotel', '=', False)]}"/>
+                            <field name="hotel_additional_info" attrs="{'invisible': [('is_hotel', '=', False)]}" colspan="4" />
+                        </group>
+                        <group col="8" colspan="2">
+                            <!-- Car block -->
+                            <field name="is_company_car" />
+                            <field name="is_chsec" />
+                            <field name="is_car_rental" colspan="4"/>
+                            <field name="car_date_from" attrs="{'invisible': [('is_company_car', '=', False), ('is_chsec', '=', False), ('is_car_rental', '=', False)]}" colspan="4"/>
+                            <field name="car_date_to" attrs="{'invisible': [('is_company_car', '=', False), ('is_chsec', '=', False), ('is_car_rental', '=', False)]}" colspan="4"/>
+                            <field name="car_additional_info" attrs="{'invisible': [('is_company_car', '=', False), ('is_chsec', '=', False), ('is_car_rental', '=', False)]}" colspan="8" />
+                        </group>
+                        <group col="4" colspan="2">
+                            <!-- Flight block -->
+                            <field name="is_flight" />
+                            <newline/>
+                            <field name="flight_date_to_destination" attrs="{'invisible': [('is_flight', '=', False)]}"/>
+                            <field name="flight_date_return" attrs="{'invisible': [('is_flight', '=', False)]}"/>
+                            <field name="flight_additional_info" attrs="{'invisible': [('is_flight', '=', False)]}" colspan="4" />
+
+                            <separator/>
+                            <field name="trip_additionnal_info" colspan="4" />
+                        </group>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_maintenance_travel">
+        <field name="name">Travel Arrangements</field>
+        <field name="res_model">maintenance.travel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="maintenance_travel_view_tree_01"></field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            No travel registered yet.
+          </p>
+        </field>
+    </record>
+</odoo>

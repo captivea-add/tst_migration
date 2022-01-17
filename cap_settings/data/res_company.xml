@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="res.company" id="company_tosa">
+        <field name="name">TOSA</field>
+        <field name="currency_id">1</field>
+        <field name="sequence">1</field>
+        <field name="currency_id" ref="base.CHF"/>
+    </record>
+
+    <record model="res.company" id="company_traction">
+        <field name="name">Traction garantie facturable</field>
+        <field name="currency_id">1</field>
+        <field name="sequence">2</field>
+        <field name="currency_id" ref="base.CHF"/>
+    </record>
+
+    <record model="res.company" id="company_puissance">
+        <field name="name">Puissance</field>
+        <field name="currency_id">1</field>
+        <field name="sequence">3</field>
+        <field name="currency_id" ref="base.CHF"/>
+    </record>
+
+</odoo>

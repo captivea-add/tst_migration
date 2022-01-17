@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="survey_question_form_view" model="ir.ui.view">
+            <field name="name">survey.question.form.view</field>
+            <field name="model">survey.question</field>
+            <field name="inherit_id" ref="survey.survey_question_form" />
+            <field name="arch" type="xml">
+
+                <xpath expr="//notebook/page[2]/group/div[1]" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': [('question_type', 'not in', ['lang', 'textbox', 'numerical_box', 'datetime'])]}
+                    </attribute>
+                </xpath>
+
+                <field name="validation_email" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <label for="validation_email" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </label>
+
+            </field>
+        </record>
+
+        <record id="survey_user_input_line_form_inherited" model="ir.ui.view">
+            <field name="name">survey.user_input_line.form.view</field>
+            <field name="model">survey.user_input_line</field>
+            <field name="inherit_id" ref="survey.survey_user_input_line_form" />
+            <field name="arch" type="xml">
+                <field name="value_text" position="after">
+                    <!-- Image Show Field in the Answer -->
+                    <field name="img_sign" widget="image" attrs="{'invisible': [('answer_type','!=','sign')]}"/>
+
+                    <field name="attachment_id" widget="binary" attrs="{'invisible': [('answer_type','!=','attachment')]}"/>
+                </field>
+
+                <!-- Value text visible for the Other Answer Type -->
+                <field name="value_text" position="attributes">
+                    <attribute name="attrs">{'invisible': [('answer_type','not in',['text', 'sign'])]}</attribute>
+                </field>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

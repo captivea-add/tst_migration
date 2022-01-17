@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="offline_assets" name="offline assets">
+        <script type="text/javascript" src="/cap_maintenance/static/src/js/url_opener.js"></script>
+    </template>
+
+    <template id="offline_starting_view" name="Offline starting screen">&lt;!DOCTYPE html&gt;
+        <html>
+            <head>
+                <title>Opening requested pages</title>
+                <t t-call-assets="cap_maintenance.offline_assets"/>
+            </head>
+            <body t-attf-onload="url_opener.execute({{urls_to_open}});"/>
+        </html>
+    </template>
+</odoo>

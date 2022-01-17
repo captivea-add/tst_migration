@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- MANAGE DEFAULT 'IR.CRON' FOR 'MAINTENANCE.REQUEST' MODEL -->
+
+    <!-- RECOVER ATTACHMENTS FOR ALL RECORDS -->
+    <data>
+
+        <!-- RECOVER ATTACHMENTS FOR ALL RECORDS -->
+        <record model="ir.cron" id="maintenance_request_cron_01">
+            <field name="name">[maintenance.request] - Recover attachments for all records</field>
+            <field name="active" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">0</field>
+            <field name="nextcall" eval="datetime.now() + relativedelta(hour=0, minute=0, second=0, microsecond=0)"/>
+            <field name="doall" eval="True"/>
+            <field name="model_id" ref="model_maintenance_request"/>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[
+# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+model.recover_attachments_for_all_records()
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

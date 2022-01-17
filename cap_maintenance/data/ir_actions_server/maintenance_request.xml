@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MANAGE DEFAULT 'IR.ACTIONS.SERVER' FOR 'MAINTENANCE.REQUEST' MODEL -->
+
+    <!-- RECOVER ATTACHMENTS -->
+    <data>
+
+        <!-- RECOVER ATTACHMENTS -->
+        <record model="ir.actions.server" id="maintenance_request_server_01">
+            <field name="name">Recover Attachments</field>
+            <field name="model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="binding_model_id" ref="maintenance.model_maintenance_request"/>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[
+# Available variables:
+#  - env: Odoo Environment on which the action is triggered
+#  - model: Odoo Model of the record on which the action is triggered; is a void recordset
+#  - record: record on which the action is triggered; may be void
+#  - records: recordset of all records on which the action is triggered in multi-mode; may be void
+#  - time, datetime, dateutil, timezone: useful Python libraries
+#  - log: log(message, level='info'): logging function to record debug information in ir.logging table
+#  - Warning: Warning Exception to use with raise
+# To return an action, assign: action = {...}
+
+records.recover_attachments()
+            ]]></field>
+        </record>
+
+    </data>
+</odoo>

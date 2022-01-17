@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="survey_templates_autoclose_on_finish" inherit_id="survey.sfinished">
+            <xpath expr="//div" position="before">
+                <script>
+                    window.close();
+                </script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

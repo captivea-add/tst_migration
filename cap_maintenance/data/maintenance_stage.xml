@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="maintenance.stage" id="maintenance.stage_0">
+        <field name="active">False</field>
+    </record>
+    <record model="maintenance.stage" id="maintenance.stage_1">
+        <field name="active">False</field>
+    </record>
+    <record model="maintenance.stage" id="maintenance.stage_3">
+        <field name="active">False</field>
+    </record>
+    <record model="maintenance.stage" id="maintenance.stage_4">
+        <field name="active">False</field>
+    </record>
+
+    <record id="stage_not_assigned" model="maintenance.stage">
+        <field name="name">Not Assigned</field>
+        <field name="sequence" eval="1" />
+        <field name="fold" eval="False" />
+        <field name="done" eval="False" />
+    </record>
+    <record id="stage_in_progress" model="maintenance.stage">
+        <field name="name">In Progress</field>
+        <field name="sequence" eval="2" />
+        <field name="fold" eval="False" />
+        <field name="done" eval="False" />
+    </record>
+    <record id="stage_not_started" model="maintenance.stage">
+        <field name="name">Not Started</field>
+        <field name="sequence" eval="3" />
+        <field name="fold" eval="False" />
+        <field name="done" eval="False" />
+    </record>
+    <record id="stage_done" model="maintenance.stage">
+        <field name="name">Done</field>
+        <field name="sequence" eval="4" />
+        <field name="fold" eval="False" />
+        <field name="done" eval="True" />
+    </record>
+</odoo>

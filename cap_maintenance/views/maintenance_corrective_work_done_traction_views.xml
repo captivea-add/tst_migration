@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for corrective work done -->
+    <record id="maintenance_corrective_work_done_traction_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_corrective_work_done_traction_view_tree_01</field>
+        <field name="model">maintenance.corrective.work.done.traction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"                  width="0.5"/>
+                <field name="worker_id"             width="0.5"/>
+                <field name="corrective_work_done" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for corrective work done -->
+    <record id="maintenance_corrective_work_done_traction_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_corrective_work_done_traction_view_form_01</field>
+        <field name="model">maintenance.corrective.work.done.traction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date" />
+                            <field name="worker_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="corrective_work_done" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

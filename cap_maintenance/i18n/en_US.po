@@ -1,0 +1,2993 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cap_maintenance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-11 08:44+0000\n"
+"PO-Revision-Date: 2020-09-11 08:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__diner_allowance_days
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__hard_work_bonus_days
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__lunch_allowance_days
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__night_allowance_days
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__other_country_bonus_days
+msgid "# Days"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:mail.template,subject:cap_maintenance.customer_maintenance_timesheet_mail_template
+#: model:mail.template,subject:cap_maintenance.detailed_report_work_done_mail_template
+#: model:mail.template,subject:cap_maintenance.internal_maintenance_timesheet_mail_template
+#: model:mail.template,subject:cap_maintenance.worker_preparation_mail_template
+msgid "${object.build_report_name()}"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.report,print_report_name:cap_maintenance.action_print_detailed_work_done_report_puissance
+#: model:ir.actions.report,print_report_name:cap_maintenance.action_print_detailed_work_done_report_tosa
+#: model:ir.actions.report,print_report_name:cap_maintenance.action_print_detailed_work_done_report_traction
+msgid "'Maintenance Detailed Work Done Report'"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.report,print_report_name:cap_maintenance.action_print_maintenance_timesheet_report
+msgid "'Maintenance Timesheet Report'"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Summary"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "1. Work To Be Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "2. Work Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "3. Corrective Work To Plan"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "4. Preventive Work To Plan"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "5. Notes"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:mail.template,body_html:cap_maintenance.internal_maintenance_timesheet_mail_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<p>\n"
+"                Hello,<br/>\n"
+"                <br/>\n"
+"                Please find attached internal timesheet.<br/>\n"
+"                <br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<p>\n"
+"                Good morning,<br/>\n"
+"                <br/>\n"
+"                Please find attached internal timesheet.<br/>\n"
+"                <br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+
+#. module: cap_maintenance
+#: model:mail.template,body_html:cap_maintenance.detailed_report_work_done_mail_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<p>\n"
+"                Hello,<br/>\n"
+"                <br/>\n"
+"                Please find attached report for intervention ${object.maintenance_request_id.company_request_num}.<br/>\n"
+"                <br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+msgstr ""
+"<?xml version=\"1.0\"?>\n"
+"<p>\n"
+"                Hello,<br/>\n"
+"                <br/>\n"
+"                Please find attached report for intervention nb ${object.maintenance_request_id.company_request_num}\n"
+"                % if object.maintenance_request_id.equipment_id :\n"
+"                   refering to ${object.maintenance_request_id.equipment_id.name}\n"
+"                % endif\n"
+"                .<br/><br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+
+#. module: cap_maintenance
+#: model:mail.template,body_html:cap_maintenance.customer_maintenance_timesheet_mail_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<p>\n"
+"                Hello,<br/>\n"
+"                <br/>\n"
+"                Please find attached timesheet.<br/>\n"
+"                <br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+msgstr ""
+
+#. module: cap_maintenance
+#: model:mail.template,body_html:cap_maintenance.worker_preparation_mail_template
+msgid ""
+"<?xml version=\"1.0\"?>\n"
+"<p>Hello,<br/>\n"
+"                <br/>\n"
+"                You have been assigned to <a href=\"/web#model=maintenance.request&amp;id=${object.id}&amp;view_type=form&amp;action=${object.env.ref('maintenance.hr_equipment_request_action').id}\" target=\"_blank\"><b>${object.name}</b></a>.<br/>\n"
+"                <br/>\n"
+"                Please find details below :<br/>\n"
+"                <br/>\n"
+"                % if object.maintenance_travel_ids :\n"
+"                <p>\n"
+"                    <h4>Travel arrangements</h4>\n"
+"                    % for travel in object.maintenance_travel_ids:\n"
+"                    <ul>\n"
+"                        <li>\n"
+"                            Travel #${loop.index}\n"
+"                            <ul>\n"
+"                                % if travel.is_hotel :\n"
+"                                    <li>\n"
+"                                        <u>Hotel</u><br/>\n"
+"                                        Booked from ${travel.hotel_date_from} to ${travel.hotel_date_to}.<br/>\n"
+"                                        ${travel.hotel_additional_info}\n"
+"                                    </li>\n"
+"                                % endif\n"
+"                                % if travel.is_company_car or travel.is_chsec or travel.is_car_rental :\n"
+"                                    <li>\n"
+"                                        <u>Car</u><br/>\n"
+"                                        % if travel.is_company_car :\n"
+"                                            Company Car<br/>\n"
+"                                        % endif\n"
+"                                        % if travel.is_chsec :\n"
+"                                            CHSEC<br/>\n"
+"                                        % endif\n"
+"                                        % if travel.is_car_rental :\n"
+"                                            Car Rental<br/>\n"
+"                                        % endif\n"
+"                                        From ${travel.car_date_from} To ${travel.car_date_to}.<br/>\n"
+"                                        ${travel.car_additional_info}\n"
+"                                    </li>\n"
+"                                % endif\n"
+"                                % if travel.is_flight :\n"
+"                                    <li>\n"
+"                                        <u>Flight</u><br/>\n"
+"                                        Departure : ${travel.flight_date_to_destination}<br/>\n"
+"                                        Return flight : ${travel.flight_date_return}<br/>\n"
+"                                        ${travel.flight_additional_info}\n"
+"                                    </li>\n"
+"                                % endif\n"
+"                                % if travel.trip_additionnal_info :\n"
+"                                    <li>\n"
+"                                        <u>Additionnal information</u><br/>\n"
+"                                        ${travel.trip_additionnal_info}\n"
+"                                    </li>\n"
+"                                % endif\n"
+"                                % if travel.has_attachment :\n"
+"                                    <li>\n"
+"                                        <u>File(s)</u><br/>\n"
+"                                        <ul>\n"
+"                                        % for attachment in travel.attachment_ids :\n"
+"                                            % set void = attachment.sudo().generate_access_token()\n"
+"                                            <li><a href=\"/web/content/${attachment.id}?access_token=${attachment.access_token}\" target=\"_blank\">${attachment.name}</a></li>\n"
+"                                        % endfor\n"
+"                                        </ul>\n"
+"                                    </li>\n"
+"                                % endif\n"
+"\n"
+"                                <style>\n"
+"                                    .cap_style table, .cap_style tr {\n"
+"                                        padding: 10px;\n"
+"                                        border: 1px solid rgba(108, 117, 125, 0.3);\n"
+"                                        border-collapse: collapse;\n"
+"                                    }\n"
+"                                    .cap_style thead {\n"
+"                                        background-color: #875A7B;\n"
+"                                        color: white;\n"
+"                                    }\n"
+"                                    .cap_style th {\n"
+"                                        min-width: 100px;\n"
+"                                        text-align:center;\n"
+"                                    }\n"
+"                                </style>\n"
+"\n"
+"\n"
+"                                % set tool_ids = travel.find_all_tools()\n"
+"                                % if tool_ids :\n"
+"                                <li>\n"
+"                                    <u>Tools</u>\n"
+"                                    <table class=\"cap_style\">\n"
+"                                            <thead class=\"cap_style\">\n"
+"                                                <tr class=\"cap_style\">\n"
+"                                                    <th class=\"cap_style\" style=\"width: 20%;\">Name</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Quantity</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Delivery On Site</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Assignment</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 25%;\">Note</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 25%;\">Files</th>\n"
+"                                                </tr>\n"
+"                                            </thead>\n"
+"                                            <tbody>\n"
+"                                                % for tool in tool_ids:\n"
+"                                                    <tr class=\"cap_style\">\n"
+"                                                        <td>${tool.name}</td>\n"
+"                                                        <td style=\"text-align:center;\">${tool.quantity}</td>\n"
+"                                                        <td style=\"text-align:center;\">\n"
+"                                                            % if tool.is_delivery_on_site :\n"
+"                                                               <input type=\"checkbox\" checked=\"checked\" disabled=\"disabled\"/>\n"
+"                                                            % else :\n"
+"                                                                <input type=\"checkbox\" disabled=\"disabled\"/>\n"
+"                                                            % endif\n"
+"                                                        </td>\n"
+"                                                        <td>${tool.assignment}</td>\n"
+"                                                        <td>${tool.note}</td>\n"
+"                                                        <td>\n"
+"                                                            % if tool.has_attachment :\n"
+"                                                                % for attachment in tool.attachment_ids :\n"
+"                                                                    % set void = attachment.sudo().generate_access_token()\n"
+"                                                                    <a href=\"/web/content/${attachment.id}?access_token=${attachment.access_token}\" target=\"_blank\">${attachment.name}</a><br/>\n"
+"                                                                % endfor\n"
+"                                                            % endif\n"
+"                                                        </td>\n"
+"                                                    </tr>\n"
+"                                                % endfor\n"
+"                                        </tbody>\n"
+"                                    </table>\n"
+"                                </li>\n"
+"                                % endif\n"
+"\n"
+"                                % set spare_parts_ids = travel.find_all_spare_parts()\n"
+"                                % if spare_parts_ids :\n"
+"                                <li>\n"
+"                                    <u>Spare Parts</u>\n"
+"                                    <table class=\"cap_style\">\n"
+"                                            <thead class=\"cap_style\">\n"
+"                                                <tr class=\"cap_style\">\n"
+"                                                    <th class=\"cap_style\" style=\"width: 20%;\">Name<br/>(Reference)</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Quantity</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Delivery On Site</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 10%;\">Assignment</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 25%;\">Note</th>\n"
+"                                                    <th class=\"cap_style\" style=\"width: 25%;\">Files</th>\n"
+"                                                </tr>\n"
+"                                            </thead>\n"
+"                                            <tbody>\n"
+"                                                % for spare_part in spare_parts_ids:\n"
+"                                                    <tr class=\"cap_style\">\n"
+"                                                        <td>${spare_part.name}<br/>(${spare_part.reference})</td>\n"
+"                                                        <td style=\"text-align:center;\">${spare_part.quantity}</td>\n"
+"                                                        <td style=\"text-align:center;\">\n"
+"                                                            % if spare_part.is_delivery_on_site :\n"
+"                                                               <input type=\"checkbox\" checked=\"checked\" disabled=\"disabled\"/>\n"
+"                                                            % else :\n"
+"                                                                <input type=\"checkbox\" disabled=\"disabled\"/>\n"
+"                                                            % endif\n"
+"                                                        </td>\n"
+"                                                        <td>${spare_part.assignment}</td>\n"
+"                                                        <td>${spare_part.note}</td>\n"
+"                                                        <td>\n"
+"                                                            % if spare_part.has_attachment :\n"
+"                                                                % for attachment in spare_part.attachment_ids :\n"
+"                                                                    % set void = attachment.sudo().generate_access_token()\n"
+"                                                                    <a href=\"/web/content/${attachment.id}?access_token=${attachment.access_token}\" target=\"_blank\">${attachment.name}</a><br/>\n"
+"                                                                % endfor\n"
+"                                                            % endif\n"
+"                                                        </td>\n"
+"                                                    </tr>\n"
+"                                                % endfor\n"
+"                                        </tbody>\n"
+"                                    </table>\n"
+"                                </li>\n"
+"                                % endif\n"
+"                            </ul>\n"
+"                        </li>\n"
+"                    </ul>\n"
+"                    % endfor\n"
+"                </p>\n"
+"                % endif\n"
+"                <br/>\n"
+"                Regards,\n"
+"            </p>\n"
+"        "
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "<b>Rapport de Montage N°</b>"
+msgstr "<b>Report nb</b>"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid ""
+"<br/>\n"
+"                                        <span class=\"cap_field\">New Serial Number</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "<span class=\"cap_field\">After Work Photos</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "<span class=\"cap_field\">Before Work Photos</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "<span class=\"cap_field\">Comments</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "<span class=\"cap_field\">Extra Hours:</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "<span class=\"cap_field\">Name</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_field\">Note</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_field\">Old Serial Number</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_field\">Pictures</span><br/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">1. Work To Be Done</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">2. Work Done</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">3. Corrective Work To Plan</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">4. Preventive Work To Plan</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">5. Notes</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Commercial information</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Concerned Unit</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Degassing and oil top up</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "<span class=\"cap_section\">Equipment</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Exchange of an accessory</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "<span class=\"cap_section\">Intervention</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Technical characteristics</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "<span class=\"cap_section\">Work Description</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">Mailing Customer Timesheet</span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">Mailing Internal Timesheet</span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"<span class=\"o_form_label\">Mailing List Preparation</span>\n"
+"                                    <span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid ""
+"<span class=\"text-muted\">(Specify how the modifications were validated "
+"before the return to operation)</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid ""
+"<span class=\"text-muted\">(Specify the initial information that caused the "
+"intervention and the bus number or substation)</span>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid ""
+"<span class=\"text-muted\">(Specify the report - including software version "
+"- at the start of the intervention and at the end of the "
+"intervention)</span>"
+msgstr ""
+"<span class=\"text-muted\">(Specify the status - including software version "
+"- at the start of the intervention and at the end of the "
+"intervention)</span>"
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_consignment__type__abb
+msgid "ABB"
+msgstr "HITACHI ABB"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__accessories_used_ids
+msgid "Accessories Used"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__accessory
+msgid "Accessory"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Account #"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_needaction
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_stage__active
+msgid "Active"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_exception_decoration
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_state
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Additional Security Document"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__after_work_attachment_ids
+msgid "After Work Photos"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__allowance_per_km
+msgid "Allowance Per Km"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__allowance_total_kms_amount
+msgid "Amount"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__diner_allowance_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__hard_work_bonus_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__lunch_allowance_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__night_allowance_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__other_country_bonus_amount
+msgid "Amount/Day"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__response_line_ids
+msgid "Answers"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__assignment
+msgid "Assignement"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_attachment_count
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__author
+msgid "Author"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__before_work_attachment_ids
+msgid "Before Work Photos"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__bus_num
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid "Bus Num"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__ccrp
+msgid "CCRP"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__is_chsec
+msgid "CHSEC"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__car_additional_info
+msgid "Car Additional Information"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__is_car_rental
+msgid "Car Rental"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__comments
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Comments"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Comments (pay attention will be not printed on the report)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__company_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__company_id
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_flaw_origin_search_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_flaw_responsibility_search_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_flaw_search_01
+msgid "Company"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__is_company_car
+msgid "Company Car"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_consignment
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__consignment
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__consignment_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_survey_user_input__consignment_id
+msgid "Consignment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"Contacts that will automatically be included in Mailing List Customer "
+"Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"Contacts that will automatically be included in Mailing List Internal "
+"Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid ""
+"Contacts that will automatically be included in Mailing List Preparation"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__corrective_work_done
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__corrective_work_done
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid "Corrective Work Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__corrective_work_to_plan
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Corrective Work To Plan"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_consignment_view_tree_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_travel_view_tree_01
+msgid "Create Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__create_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__create_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__currency_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__chf_currency_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__diner_allowance_currency_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__lunch_allowance_currency_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__night_allowance_currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__customer_partner_id
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_consignment__type__customer
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_timesheet__timesheet_type__customer
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Customer"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__tosa_customer_code
+msgid "Customer Code TOSA"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__customer_display_name
+msgid "Customer Name"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__customer_ref
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Customer Ref."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__customer_signature
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__customer_signature
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Customer Signature"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__customer_timesheet_ids
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#: model:survey.survey,title:cap_maintenance.survey_customer_timesheet
+msgid "Customer Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__customer_timesheet_after_work_attachment_ids
+msgid "Customer Timesheet After Work Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__customer_timesheet_before_work_attachment_ids
+msgid "Customer Timesheet Before Work Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__customer_timesheet_count
+msgid "Customer Timesheet Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#, python-format
+msgid "Customer Timesheets"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__customer_missing
+msgid "Customer is missing"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__datetime
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__date
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Date :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Date of intervention"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_request__schedule_date
+msgid ""
+"Date the maintenance team plans the maintenance.  It should not differ much "
+"from the Request Date. "
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__sequence
+msgid "Day"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__deconsignment_ids
+msgid "Deconsignment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__deconsignment_maintenance_request_id
+msgid "Deconsignment Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Degassing"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__degassing_date
+msgid "Degassing Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__degassing_worker_id
+msgid "Degassing Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__is_delivery_on_site
+msgid "Delivery On Site"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__description
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Description"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.action_detailed_report_work_done
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__detailed_report_work_done_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__detailed_report_work_done_ids
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Detailed Report Work Done"
+msgstr "Detailed repair report"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__detailed_report_work_done_count
+msgid "Detailed Report Work Done Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Diner (Capped Allowance)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__display_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_distance_facturable
+msgid "Distance facturable"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_distance_garantie
+msgid "Distance garantie"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Doc N° :"
+msgstr "Doc nb :"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__document_num
+msgid "Document"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "Don't forget to sign it before sending it."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.stage,name:cap_maintenance.stage_done
+msgid "Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__duration
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Duration"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__duration_date
+msgid "Duration Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__duration_worker_id
+msgid "Duration Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Dépenses"
+msgstr "Expenses"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#: model:survey.survey,title:cap_maintenance.survey_electrical_consignment
+msgid "Electrical Consignment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#: model:survey.survey,title:cap_maintenance.survey_electrical_deconsignment
+msgid "Electrical DeConsignment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__email_cc
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__email_cc
+msgid "Email cc"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__is_email_sent
+msgid "Email sent"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Email:"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_en_usine_facturable
+msgid "En usine facturable"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_en_usine_garantie
+msgid "En usine garantie"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__end_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__end_date
+msgid "End date"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "End date must be greater than Start Date."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_envoi_piece
+msgid "Envoi pièce de rechange"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid "Equipment"
+msgstr "Equipment : "
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__equipment_group_id
+msgid "Equipment Group"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.ui.menu,name:cap_maintenance.menu_equipement_group_tree
+msgid "Equipment Groups"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.ui.menu,name:cap_maintenance.menu_equipement_subgroup_tree
+msgid "Equipment SubGroups"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__equipment_subgroup_ids
+msgid "Equipment Subgroup"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid "Equipment[{equipment}] Intervention[{request_num}] Preparation"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "Equipment[{equipment}] Intervention[{request_num}] Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#, python-format
+msgid ""
+"Equipment[{equipment}] Intervention[{request_num}] Work and instruction "
+"report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__maintenance_expense_ids
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Expenses"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__expenses_count
+msgid "Expenses Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__extra_hours_management
+msgid "Extra Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__extra_hours
+msgid "Extra Hours 6AM-11PM"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__extra_night_and_holiday_hours
+msgid "Extra Night Hours and Holiday"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__attachment_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__attachment_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__attachment_ids
+msgid "File"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_consignment_view_form_01
+msgid "Fill"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__flaw_origin
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_generic_list__type__flaw_origin
+msgid "Flaw Origin"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.maintenance_flaw_origin_window_01
+#: model:ir.ui.menu,name:cap_maintenance.ir_ui_menu_02
+msgid "Flaw Origins"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.maintenance_flaw_responsibility_window_01
+#: model:ir.ui.menu,name:cap_maintenance.ir_ui_menu_03
+msgid "Flaw Responsibilities"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__flaw_responsibility_id
+msgid "Flaw Responsibility"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.maintenance_flaw_window_01
+#: model:ir.ui.menu,name:cap_maintenance.ir_ui_menu_01
+msgid "Flaws"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__is_flight
+msgid "Flight"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__flight_additional_info
+msgid "Flight Additional Information"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_follower_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_channel_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__car_date_from
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__hotel_date_from
+msgid "From"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__picture_attachment_ids
+msgid "Get some pictures and select them here."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__after_work_attachment_ids
+msgid "Get you photos after working and select them here."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__before_work_attachment_ids
+msgid "Get you photos before working and select them here."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__equipment_group
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Group"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Hard work Bonus"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__has_attachment
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__has_attachment
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__has_attachment
+msgid "Has Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Heures d'attentes et de préparation"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Heures de nuit 23h00 - 06h00"
+msgstr "Night hours 23h00 - 06h00 (150%)"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Heures effectuées"
+msgstr "Spent hours"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Heures normales"
+msgstr "Hours (100%)"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Heures supplémentaires 06h00 - 23h00"
+msgstr "Overtime hours 06h00 - 23h00 (125%)"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid ""
+"Heures supplémentaires de nuit ou heures travail dimanches et jour fériés"
+msgstr "Night overtime hours or sundays/bankholidays hours (150%)"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__is_hotel
+msgid "Hotel"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__hotel_additional_info
+msgid "Hotel Additional Information"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__id
+msgid "ID"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_exception_icon
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__activity_exception_icon
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_needaction
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_unread
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_needaction
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_error
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_sms_error
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_has_error
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Imputation SAP<br/>"
+msgstr "Account <br/>"
+
+#. module: cap_maintenance
+#: model:maintenance.stage,name:cap_maintenance.stage_in_progress
+msgid "In Progress"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Indemnité kilométrique"
+msgstr "Km allowance"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Indémnités de Déplacement"
+msgstr "Daily allowance"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Indémnités spéciales"
+msgstr "Special allowances"
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_timesheet__timesheet_type__internal
+msgid "Internal"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__internal_maintenance_request_id
+msgid "Internal Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__project_num
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Internal Project N°"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__internal_timesheet_ids
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Internal Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__internal_timesheet_count
+msgid "Internal Timesheet Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#, python-format
+msgid "Internal Timesheets"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Intervention N°"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#, python-format
+msgid "Intervention Report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_is_follower
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__is_locked
+msgid "Is Locked"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__is_oil_leakage
+msgid "Is Oil Leakage"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__is_rework_competed
+msgid "Is Rework Competed"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__is_signed
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__is_signed
+msgid "Is signed"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__issue_description
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid "Issue Description"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool____last_update
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__write_uid
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__write_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Lieu <br/>"
+msgstr "Place <br/>"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__email_cc
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__email_cc
+msgid "List of cc from incoming emails."
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Local contact Person"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Location"
+msgstr "Place  "
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__timesheet_line_ids
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Logged Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Lunch (Capped Allowance)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__mailing_list_work_report_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_company__mailing_list_work_report_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_config_settings__mailing_list_work_report_partner_ids
+msgid "Mailing List Customer Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__mailing_list_final_report_partner_ids
+msgid "Mailing List Final Report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__mailing_list_payment_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_company__mailing_list_payment_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_config_settings__mailing_list_payment_partner_ids
+msgid "Mailing List Internal Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__mailing_list_preparation_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_company__mailing_list_preparation_partner_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_config_settings__mailing_list_preparation_partner_ids
+msgid "Mailing List Preparation"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid "Mailing Lists"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_main_attachment_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.res_config_settings_view_form
+msgid "Maintenance"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_accessories_used
+msgid "Maintenance Accessories Used"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_corrective_work_done_traction
+msgid "Maintenance Corrective Work Done Traction"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_detailed_report_work_done
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__maintenance_detailed_report_work_done_id
+msgid "Maintenance Detailed Report Work Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.report,name:cap_maintenance.action_print_detailed_work_done_report_puissance
+#: model:ir.actions.report,name:cap_maintenance.action_print_detailed_work_done_report_tosa
+#: model:ir.actions.report,name:cap_maintenance.action_print_detailed_work_done_report_traction
+msgid "Maintenance Detailed Work Done Report"
+msgstr "Detailed repair report"
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_equipment
+msgid "Maintenance Equipment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_equipment_category
+msgid "Maintenance Equipment Category"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_equipment_group
+msgid "Maintenance Equipment Group"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_equipment_subgroup
+msgid "Maintenance Equipment Subgroup"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_expense
+msgid "Maintenance Expense"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_generic_list
+msgid "Maintenance List Of Values"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_request
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__maintenance_request_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__maintenance_request_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__maintenance_request_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__maintenance_request_id
+msgid "Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_company__maintenance_request_sequence_id
+msgid "Maintenance Request Sequence"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_request_type
+msgid "Maintenance Request Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_stage
+msgid "Maintenance Stage"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__maintenance_team_id
+msgid "Maintenance Team"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_timesheet
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_expense__maintenance_timesheet_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__maintenance_timesheet_id
+msgid "Maintenance Timesheet"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_timesheet_line
+msgid "Maintenance Timesheet Line"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.report,name:cap_maintenance.action_print_maintenance_timesheet_report
+msgid "Maintenance Timesheet report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_tree_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_tree_02
+msgid "Maintenance Timesheets"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_tool
+msgid "Maintenance Tool"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_travel
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__maintenance_travel_ids
+msgid "Maintenance Travel"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__request_type
+msgid "Maintenant Request Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__major_flaw
+msgid "Major Flaw"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__manager_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__manager_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__manager_id
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Manager"
+msgstr "Project Manager"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__commissioning_year
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Manufacturing Year"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_partner__matricule
+#: model:ir.model.fields,field_description:cap_maintenance.field_res_users__matricule
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Matricule"
+msgstr "ID Nr"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_error
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Montant"
+msgstr "Allowance"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Montant/Jour"
+msgstr "Allowance/day"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__picture_name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_group__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_subgroup__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_origin__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_flaw_responsibility__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request_type__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__name
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__name
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_01
+msgid "Name"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Nb Jour"
+msgstr "Nb of days"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__new_serial_no
+msgid "New Serial Number"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_date_deadline
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_summary
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_type_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Night (Capped Allowance or Attached Bills)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__night_hours
+msgid "Night Hours 11PM-6AM"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.actions.act_window,help:cap_maintenance.action_maintenance_travel
+msgid "No travel registered yet."
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Nom du client <br/>"
+msgstr "Customer name <br/>"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Nom/Prénom <br/>"
+msgstr "Name/Firstname <br/>"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Non :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_consignment__type__none
+msgid "None"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.stage,name:cap_maintenance.stage_not_assigned
+msgid "Not Assigned"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.stage,name:cap_maintenance.stage_not_started
+msgid "Not Started"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_1_note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_2_note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_3_note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_4_note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_5_note
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__note
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Note"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Notes"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.actions.act_window,help:cap_maintenance.action_detailed_report_work_done
+#: model_terms:ir.actions.act_window,help:cap_maintenance.action_maintenance_timesheet
+#: model_terms:ir.actions.act_window,help:cap_maintenance.action_maintenance_tool
+msgid "Nothing registered yet."
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Nuitée (forfait ou justificatifs annexés)"
+msgstr "Nights( allowances or add attachments)"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_needaction_counter
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_error_counter
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_needaction_counter
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_error_counter
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__message_unread_counter
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Oil Leakage"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_leakage_date
+msgid "Oil Leakage Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_leakage_location
+msgid "Oil Leakage Location"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_leakage_worker_id
+msgid "Oil Leakage Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_sampling_date
+msgid "Oil Sampling Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_sampling_worker_id
+msgid "Oil Sampling Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_tightness_check_date
+msgid "Oil Tightness Check Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_tightness_check_worker_id
+msgid "Oil Tightness Check Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_top_up_date
+msgid "Oil Top Up Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_top_up_quantity
+msgid "Oil Top Up Quantity"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__oil_top_up_worker_id
+msgid "Oil Top Up Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Oil Top up"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Oil sampling"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Oil tightness check"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_accessories_used__old_serial_no
+msgid "Old Serial Number"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__on_site_partner_ids
+msgid "On Site Partners"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "On-Site Technician"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Open All"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid ""
+"Operation not allowed.\n"
+"Electrical Consignment is missing."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid ""
+"Operation not allowed.\n"
+"Electrical DeConsignment is missing."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid ""
+"Operation not allowed.\n"
+"Take 5 is missing."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_order_num
+msgid "Order N°"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Other Country Bonus"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Oui :"
+msgstr "Yes :"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__flight_date_to_destination
+msgid "Outbound Flight"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.timesheet_external_layout_report
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__worker_id
+msgid "Performed By"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Performed by"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Phone:"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_4_image
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Photo Remplissage transformateur ou régleur sous charge"
+msgstr "Picture of transfo or tap-changer oil filling"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_2_image
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Photo des mâts de mise à terre côté BT et HT"
+msgstr "Pictures of HV and LV groundings"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_3_image
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Photo installation chantier (outillage, citerne, bac rétention etc…)"
+msgstr "Pictures of the site works (toolings, tanks, containment tanks...)"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_1_image
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Photo plaque signalétique transformateur et régleur sous charge"
+msgstr "Picture of the transfo or tap changer ID plate"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_attachment_picture__picture
+msgid "Picture"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_attachment_picture
+msgid "Picture Attachment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__picture_attachment_ids
+msgid "Pictures"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "Please fill 'Mailing List Customer Timesheet' field first."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#, python-format
+msgid "Please fill 'Mailing List Final Report' field first."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "Please fill 'Mailing List Spent Hours' field first."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid "Please fill Take 5 form first."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_puissance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_category__puissance_puissance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Power"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Power (MVA)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Prepared By :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pressure
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Pressure"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pressure_date
+msgid "Pressure Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pressure_worker_id
+msgid "Pressure Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__preventive_work_to_plan
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Preventive Work To Plan"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Primes de travaux difficiles"
+msgstr "Allowance for special activities"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Project #"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Project :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_project_manager
+msgid "Project Manager"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pump_check_up_date
+msgid "Pump Check Up Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pump_check_up_quantity
+msgid "Pump Check Up Quantity"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__pump_check_up_worker_id
+msgid "Pump Check Up Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Pump Check up"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Période (jour/mois/année) du"
+msgstr "From (day/month/year) to"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__quantity
+msgid "Quantity"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__data_recovery_fullpath
+msgid "Recovery file path"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__reference
+msgid "Reference"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__regular_hours
+msgid "Regular Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Repas de midi (forfait)"
+msgstr "Lunch (allowances)"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Repas du soir (forfait)"
+msgstr "Dinner (allowances)"
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#, python-format
+msgid "Report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__report_date
+msgid "Report Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__report_lang
+msgid "Report Lang"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__company_request_num
+msgid "Request Number"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__is_customer_signature_required
+msgid "Require Customer Signature"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__response_id
+msgid "Response"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__activity_user_id
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__flight_date_return
+msgid "Return Flight"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Rev. :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__document_revision
+msgid "Revision"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__rework_competed_date
+msgid "Rework Competed Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__rework_competed_worker_id
+msgid "Rework Competed Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Rework Completed"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Rework hours document"
+msgstr "Timesheet nb"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_intervention_part
+msgid "Rework location"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__sap_assignment_num
+msgid "SAP Assignment Num"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_sap_design
+msgid "SAP Design"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_sap_project_num
+msgid "SAP Project N°"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_has_sms_error
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__security_document_ids
+msgid "Security Document"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Send Mail Preparation"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Send email"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_res_company__maintenance_request_sequence_id
+msgid "Sequence used for maintenance request numerotation"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Serial # of the unit"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.maintenance_config_settings_action
+#: model:ir.ui.menu,name:cap_maintenance.maintenance_config_settings_menu
+msgid "Settings"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#, python-format
+msgid "Spare Parts"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__spare_parts_count
+msgid "Spare Parts Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__spare_parts_maintenance_request_id
+msgid "Spare Parts Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__spare_parts_maintenance_tool_ids
+msgid "Spare Parts Maintenance Tool"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Special Allowances"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__schedule_date
+msgid "Start Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__start_date
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__start_date
+msgid "Start date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__response_state
+msgid "Status"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__activity_state
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__equipment_subgroup
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Subgroup"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Supplément par pays"
+msgstr "Country allowance"
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_sur_site_facturable
+msgid "Sur site facturable"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:maintenance.request.type,name:cap_maintenance.maintenance_request_type_sur_site_garantie
+msgid "Sur site garantie"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__survey_id
+msgid "Survey"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_survey_user_input
+msgid "Survey User Input"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#: model:survey.survey,title:cap_maintenance.survey_take_5
+msgid "Take 5"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__takefive_ids
+msgid "Takefive"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__takefive_maintenance_request_id
+msgid "Takefive Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Temps de voyage"
+msgstr "Traveling hours (100%)"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__timesheet_type
+msgid "Timesheet Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.action_maintenance_timesheet
+msgid "Timesheets"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__report_title
+msgid "Title"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Title :"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__car_date_to
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__hotel_date_to
+msgid "To"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_timesheet__extra_hours_management__to_compensate
+msgid "To Compensate"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_timesheet__extra_hours_management__to_pay
+msgid "To Pay"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#: model:ir.actions.act_window,name:cap_maintenance.action_maintenance_tool
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+#, python-format
+msgid "Tools"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__tools_count
+msgid "Tools Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__tools_maintenance_request_id
+msgid "Tools Maintenance Request"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__tools_maintenance_tool_ids
+msgid "Tools Maintenance Tool"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__diner_allowance_total_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__hard_work_bonus_total_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__lunch_allowance_total_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__night_allowance_total_amount
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__other_country_bonus_total_amount
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>Heures d'attentes et de préparation (100%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>Heures de nuit 23h00 - 06h00 (150%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>Heures normales (100%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>Heures supplémentaires 06h00 - 23h00 (125%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid ""
+"Total <br/>Heures supplémentaires de nuit ou heures travail dimanches et "
+"jour fériés (150%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>Temps de voyage (100%)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>des heures"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total <br/>km"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__total_hours
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__total_hours
+msgid "Total Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__total_kms
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total Kms"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Total des heures"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__traction_corrective_work_ids
+msgid "Traction Corrective Work"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_corrective_work_done_traction__traction_maintenance_detailed_report_work_done_id
+msgid "Traction Maintenance Detailed Report Work Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_done_section_5_image
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid ""
+"Traitement d’huile du transformateur et niveau d’huile transformateur et "
+"régleur"
+msgstr "Oil treatment and oil level of transformer and tap changer"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_transfo_type
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_category__puissance_transfo_type
+msgid "Transfo. Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Travail effectué (Type de produit, n° de transfo,...):<br/>"
+msgstr "Job performed (Product type , transfo nb,...):<br/>"
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "Travaux terminé"
+msgstr "Job finalized"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_tool__maintenance_travel_id
+msgid "Travel"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "Travel Allowance"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.action_maintenance_travel
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Travel Arrangements"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_travel.py:0
+#, python-format
+msgid "Travel N°{}"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_travel.py:0
+#, python-format
+msgid "Travel arrangements : Car return date must be greater than start date."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_travel.py:0
+#, python-format
+msgid ""
+"Travel arrangements : Flight return date must be greater than departure "
+"date."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_travel.py:0
+#, python-format
+msgid ""
+"Travel arrangements : Hotel leaving date must be greater than arrival date."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__travelling_hours
+msgid "Travelling Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Travels"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__travels_count
+msgid "Travels Count"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_travel__trip_additionnal_info
+msgid "Trip Additional Information"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_consignment__type
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_type
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_category__puissance_type
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_generic_list__type
+msgid "Type"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__activity_exception_decoration
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_puissance_unit
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_category__puissance_puissance_unit
+msgid "Unit"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields.selection,name:cap_maintenance.selection__maintenance_generic_list__type__uom
+msgid "Unit Of Measure"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_unread
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__message_unread_counter
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_expense__attachment
+msgid "Upload your bill."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__validation_work_done
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+msgid "Validation Work Done"
+msgstr "Validation of the work done"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__vehicle_serial
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Vehicle serial #"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Vendor"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_01
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_timesheet_view_form_02
+msgid "View PDF"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_voltage
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment_category__puissance_voltage
+msgid "Voltage"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Voltage level (HV)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+msgid "Voltage level (kV)"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__waiting_hours
+msgid "Waiting/Preparation Hours"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__puissance_warranty_duration
+msgid "Warranty Duration"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_equipment__tosa_warranty_end_date
+msgid "Warranty End Date"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Warranty issue"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.external_layout_report
+msgid "Web:"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__website_message_ids
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_detailed_report_work_done__website_message_ids
+#: model:ir.model.fields,help:cap_maintenance.field_maintenance_timesheet__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__work_comment
+msgid "Work Comment"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__work_description
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Work Description"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Work Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_detailed_report_work_done_view_form_01
+msgid "Work To Be Done"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_detailed_report_work_done.py:0
+#, python-format
+msgid "Work and Instruction Report"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__worker_id
+msgid "Worker"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet__worker_signature
+msgid "Worker Signature"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_detailed_report_work_done__worker_signature
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_puissance_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_tosa_document
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_detailed_work_done_traction_document
+msgid "Worker Signature"
+msgstr "Technician Signature"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__worker_ids
+msgid "Workers"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_request.py:0
+#, python-format
+msgid "Workers are missing."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__working_location_partner_id
+msgid "Working Location"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__working_location
+msgid "Working Location Address"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "You cannot update nor delete a timesheet which has already been sent."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_timesheet.py:0
+#, python-format
+msgid "You cannot update nor delete signed timesheet."
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/maintenance_consignment.py:0
+#: code:addons/cap_maintenance/models/maintenance_consignment.py:0
+#, python-format
+msgid "You must complete {} form before saving."
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "au"
+msgstr "to"
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_timesheet_line__kilometers
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.report_maintenance_timesheet_document
+msgid "km"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.action_maintenance_equipement_group_tree
+msgid "maintenance.equipment.group"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.actions.act_window,name:cap_maintenance.action_maintenance_equipement_subgroup_tree
+msgid "maintenance.equipment.subgroup"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_flaw
+msgid "maintenance.flaw"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_flaw_origin
+msgid "maintenance.flaw.origin"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model,name:cap_maintenance.model_maintenance_flaw_responsibility
+msgid "maintenance.flaw.responsibility"
+msgstr ""
+
+#. module: cap_maintenance
+#: code:addons/cap_maintenance/models/res_partner.py:0
+#, python-format
+msgid "{} do not have any email registered."
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__satisfied_customer_organization
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__satisfied_customer_intervention
+msgid "Satisfied Customer"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__comments_organization
+msgid "Comments about organization"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__comments_intervention
+msgid "Comments about intervention"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Organization feedback"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Intervention feedback"
+msgstr ""
+
+#. module: cap_maintenance
+#: model_terms:ir.ui.view,arch_db:cap_maintenance.maintenance_request_view_form_01
+msgid "Maintenance plan feedback"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__customer_maintenance_plan
+msgid "Maintenance Plan Applied by the Customer"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__domain_maintenance_plan
+msgid "Application Domain"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__frequency_maintenance_plan
+msgid "Frequency"
+msgstr ""
+
+#. module: cap_maintenance
+#: model:ir.model.fields,field_description:cap_maintenance.field_maintenance_request__comments_maintenance_plan
+msgid "Comments about maintenance plan"
+msgstr ""

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="0">
+        <record id="group_profile_client" model="res.groups">
+            <field name="name">Client</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_profile_partenaire" model="res.groups">
+            <field name="name">Partenaire</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_profile_autre" model="res.groups">
+            <field name="name">Autre</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_profile_hitachi" model="res.groups">
+            <field name="name">Hitachi</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+    </data>
+
+</odoo>

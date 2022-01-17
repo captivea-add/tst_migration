@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- MANAGE 'IR.MODEL.ACCESS' FOR 'MAINTENANCE.FLAW.RESPONSIBILITY' MODEL -->
+
+    <!-- 'USER TYPES / INTERNAL USER' ACCESS -->
+    <!-- 'ADMINISTRATION / SETTINGS' ACCESS -->
+    <data>
+
+        <!-- 'USER TYPES / INTERNAL USER' ACCESS -->
+        <record model="ir.model.access" id="maintenance_flaw_responsibility_access_01">
+            <field name="name">maintenance_flaw_responsibility_access_01</field>
+            <field name="model_id" search="[('model', '=', 'maintenance.flaw.responsibility')]" model="ir.model"/>
+            <field name="group_id" ref="base.group_user"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+
+        <!-- 'ADMINISTRATION / SETTINGS' ACCESS -->
+        <record model="ir.model.access" id="maintenance_flaw_responsibility_access_02">
+            <field name="name">maintenance_flaw_responsibility_access_02</field>
+            <field name="model_id" search="[('model', '=', 'maintenance.flaw.responsibility')]" model="ir.model"/>
+            <field name="group_id" ref="base.group_system"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

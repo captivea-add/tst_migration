@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="maintenance_equipment_category_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_equipment_category_view_form_01</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name ="company_type" invisible="1"/>
+                <field name="puissance_puissance"           attrs="{'invisible': [('company_type', '=', 'TOSA')]}" class="oe_inline" />
+                <field name="puissance_puissance_unit"      attrs="{'invisible': [('company_type', '=', 'TOSA')]}" context="{'default_type': 'uom'}" class="oe_inline" />
+                <field name="puissance_voltage"             attrs="{'invisible': [('company_type', '=', 'TOSA')]}" class="oe_inline"/>
+                <field name="puissance_type"                attrs="{'invisible': [('company_type', '=', 'TOSA')]}" class="oe_inline"/>
+                <field name="puissance_transfo_type"        attrs="{'invisible': [('company_type', '=', 'TOSA')]}" class="oe_inline" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
