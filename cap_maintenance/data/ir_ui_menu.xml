@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MANAGE DEFAULT 'IR.UI.MENU' -->
+
+    <!-- MAINTENANCE / CONFIGURATION / FLAWS -->
+    <!-- MAINTENANCE / CONFIGURATION / FLAW ORIGINS -->
+    <data>
+
+        <!-- MAINTENANCE / CONFIGURATION / FLAWS -->
+        <record model="ir.ui.menu" id="ir_ui_menu_01">
+            <field name="name">Flaws</field>
+            <field name="action" ref="cap_maintenance.maintenance_flaw_window_01"/>
+            <field name="parent_id" ref="maintenance.menu_maintenance_configuration"/>
+            <field name="sequence">25</field>
+        </record>
+
+        <!-- MAINTENANCE / CONFIGURATION / FLAW ORIGINS -->
+        <record model="ir.ui.menu" id="ir_ui_menu_02">
+            <field name="name">Flaw Origins</field>
+            <field name="action" ref="cap_maintenance.maintenance_flaw_origin_window_01"/>
+            <field name="parent_id" ref="maintenance.menu_maintenance_configuration"/>
+            <field name="sequence">26</field>
+        </record>
+
+        <!-- MAINTENANCE / CONFIGURATION / FLAW RESPONSIBILITIES -->
+        <record model="ir.ui.menu" id="ir_ui_menu_03">
+            <field name="name">Flaw Responsibilities</field>
+            <field name="action" ref="cap_maintenance.maintenance_flaw_responsibility_window_01"/>
+            <field name="parent_id" ref="maintenance.menu_maintenance_configuration"/>
+            <field name="sequence">27</field>
+        </record>
+
+    </data>
+</odoo>

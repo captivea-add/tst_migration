@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- MANAGE 'IR.ACTIONS.ACT_WINDOW' 'IR.ACTIONS.ACT_WINDOW.VIEW' FOR 'MAINTENANCE.FLAW' MODEL -->
+
+    <!-- WINDOW ACTION FOR DEFAULT 'MAINTENANCE.FLAW' TREE, FORM AND SEARCH VIEWS -->
+    <data>
+
+        <!-- WINDOW ACTION FOR DEFAULT 'MAINTENANCE.FLAW' TREE, FORM AND SEARCH VIEWS -->
+        <record model="ir.actions.act_window" id="maintenance_flaw_window_01">
+            <field name="name">Flaws</field>
+            <field name="res_model">maintenance.flaw</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="cap_maintenance.maintenance_flaw_search_01"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="maintenance_flaw_window_01_view_01">
+            <field name="act_window_id" ref="cap_maintenance.maintenance_flaw_window_01"/>
+            <field name="sequence">10</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="cap_maintenance.maintenance_flaw_tree_01"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="maintenance_flaw_window_01_view_02">
+            <field name="act_window_id" ref="cap_maintenance.maintenance_flaw_window_01"/>
+            <field name="sequence">20</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cap_maintenance.maintenance_flaw_form_01"/>
+        </record>
+
+    </data>
+</odoo>

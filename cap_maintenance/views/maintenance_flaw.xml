@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- MANAGE 'IR.UI.VIEW' FOR 'MAINTENANCE.FLAW' MODEL -->
+
+    <!-- DEFAULT 'MAINTENANCE.FLAW' TREE VIEW -->
+    <!-- DEFAULT 'MAINTENANCE.FLAW' FORM VIEW -->
+    <!-- DEFAULT 'MAINTENANCE.FLAW' SEARCH VIEW -->
+    <data>
+
+        <!-- ~~~~~~~~~~ -->
+        <!-- TREE VIEWS -->
+        <!-- ~~~~~~~~~~ -->
+
+        <!-- DEFAULT 'MAINTENANCE.FLAW' TREE VIEW -->
+        <record model="ir.ui.view" id="maintenance_flaw_tree_01">
+            <field name="name">maintenance_flaw_tree_01</field>
+            <field name="model">maintenance.flaw</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name"/>
+                    <field name="company_id" groups="base.group_multi_company" options='{"no_create": True}'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ~~~~~~~~~~ -->
+        <!-- FORM VIEWS -->
+        <!-- ~~~~~~~~~~ -->
+
+        <!-- DEFAULT 'MAINTENANCE.FLAW' FORM VIEW -->
+        <record model="ir.ui.view" id="maintenance_flaw_form_01">
+            <field name="name">maintenance_flaw_form_01</field>
+            <field name="model">maintenance.flaw</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box"/>
+                        <div name="title_box" class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <group name="subtitle">
+                                <field name="company_id" groups="base.group_multi_company" options='{"no_create": True}'/>
+                            </group>
+                        </div>
+                        <group name="main">
+                            <group name="main_left"/>
+                            <group name="main_right"/>
+                        </group>
+                        <notebook/>
+                    </sheet>
+                    <div name="chatter" class="oe_chatter"/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ~~~~~~~~~~~~ -->
+        <!-- SEARCH VIEWS -->
+        <!-- ~~~~~~~~~~~~ -->
+
+        <!-- DEFAULT 'MAINTENANCE.FLAW' SEARCH VIEW -->
+        <record model="ir.ui.view" id="maintenance_flaw_search_01">
+            <field name="name">maintenance_flaw_search_01</field>
+            <field name="model">maintenance.flaw</field>
+            <field name="arch" type="xml">
+                <search>
+                    <group name="quick_search">
+                        <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    </group>
+                    <group name="quick_filter_by"/>
+                    <group name="quick_group_by">
+                        <filter name="group_by_company_id" string="Company" groups="base.group_multi_company" context="{'group_by': 'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

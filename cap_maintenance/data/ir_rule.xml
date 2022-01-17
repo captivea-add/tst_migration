@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="maintenance.equipment_request_rule_user" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="maintenance.equipment_request_rule_admin_user" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+</odoo>

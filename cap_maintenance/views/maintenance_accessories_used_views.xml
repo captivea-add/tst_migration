@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for accessories used -->
+    <record id="maintenance_accessories_used_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_accessories_used_view_tree_01</field>
+        <field name="model">maintenance.accessories.used</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="accessory"/>
+                <field name="old_serial_no"/>
+                <field name="new_serial_no" />
+                <field name="note" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for accessories used -->
+    <record id="maintenance_accessories_used_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_accessories_used_view_form_01</field>
+        <field name="model">maintenance.accessories.used</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="accessory" />
+                            <field name="old_serial_no" />
+                            <field name="new_serial_no" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

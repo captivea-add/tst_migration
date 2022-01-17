@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Survey for consignment -->
+    <record id="survey_electrical_consignment" model="survey.survey">
+        <field name="access_mode">public</field>
+        <field name="users_login_required">1</field>
+        <field name="category">default</field>
+        <field name="passing_score">100</field>
+        <field name="questions_layout">one_page</field>
+        <field name="questions_selection">all</field>
+        <field name="scoring_type">no_scoring</field>
+        <field name="state">open</field>
+        <field name="title">Electrical Consignment</field>
+    </record>
+
+    <!-- Survey for deconsignment -->
+    <record id="survey_electrical_deconsignment" model="survey.survey">
+        <field name="access_mode">public</field>
+        <field name="users_login_required">1</field>
+        <field name="category">default</field>
+        <field name="passing_score">100</field>
+        <field name="questions_layout">one_page</field>
+        <field name="questions_selection">all</field>
+        <field name="scoring_type">no_scoring</field>
+        <field name="state">open</field>
+        <field name="title">Electrical DeConsignment</field>
+    </record>
+
+    <!-- Survey for Task 5 -->
+    <record id="survey_take_5" model="survey.survey">
+        <field name="access_mode">public</field>
+        <field name="users_login_required">1</field>
+        <field name="category">default</field>
+        <field name="passing_score">100</field>
+        <field name="questions_layout">one_page</field>
+        <field name="questions_selection">all</field>
+        <field name="scoring_type">no_scoring</field>
+        <field name="state">open</field>
+        <field name="title">Take 5</field>
+    </record>
+
+    <!-- Survey for Feuilles d'heures client -->
+    <record id="survey_customer_timesheet" model="survey.survey">
+        <field name="access_mode">public</field>
+        <field name="users_login_required">1</field>
+        <field name="category">default</field>
+        <field name="passing_score">100</field>
+        <field name="questions_layout">one_page</field>
+        <field name="questions_selection">all</field>
+        <field name="scoring_type">no_scoring</field>
+        <field name="state">open</field>
+        <field name="title">Customer Timesheet</field>
+    </record>
+</odoo>

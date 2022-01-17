@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--
+        Intervention Part (report_detailed_work_done report)
+
+        @param {maintenance.request}                    [maintenance_request_id]
+        @param {maintenance.detailed.report.work.done}  [detailed_work_done_id]
+    -->
+    <template id="report_detailed_work_done_intervention_part">
+        <table class="cap_table cap_bold_border extend cap_5_col" style="width: 100%;">
+            <tr class="colored_background">
+                <td class="cap_field" colspan="5"><span class="cap_section">Intervention</span></td>
+            </tr>
+            <tr>
+                <td class="cap_field">Customer</td>
+                <td colspan="4">
+                    <span t-field="maintenance_request_id.customer_partner_id" t-options='{"widget": "contact", "fields": ["parent_id", "name"], "no_marker": True}'/>
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Customer Ref.</td>
+                <td colspan="4">
+                    <span t-field="maintenance_request_id.customer_ref" />
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Internal Project N°</td>
+                <td colspan="4">
+                    <span t-field="maintenance_request_id.project_num" />
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Intervention N°</td>
+                <td colspan="4">
+                    <span t-field="maintenance_request_id.company_request_num" />
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Rework location</td>
+                <td colspan="4">
+                    <span t-field="maintenance_request_id.working_location_partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Local contact Person</td>
+                <td colspan="4">
+                    <t t-foreach="maintenance_request_id.on_site_partner_ids" t-as="on_site_partner_id">
+                        <span t-field="on_site_partner_id.self" t-options="{'widget': 'contact', 'fields': ['name', 'phone', 'email'], 'no_marker': True}" /><br/>
+                    </t>
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Date of intervention</td>
+                <td colspan="2">
+                    <span t-field="detailed_work_done_id.start_date" t-options='{"widget": "date"}' />
+                </td>
+                <td colspan="2">
+                    <span t-field="detailed_work_done_id.end_date" t-options='{"widget": "date"}' />
+                </td>
+            </tr>
+            <tr>
+                <td class="cap_field">Manager</td>
+                <td colspan="4">
+                    <span class="cap_field">Name</span><br/>
+                    <span t-if="maintenance_request_id.manager_id" t-field="maintenance_request_id.manager_id.name" />
+                </td>
+            </tr>
+            <t t-foreach="maintenance_request_id.worker_ids" t-as="worker_id">
+                <tr>
+                    <td class="cap_field">On-Site Technician</td>
+                    <td colspan="4">
+                        <span class="cap_field">Name</span><br/>
+                        <span t-field="worker_id.name" />
+                    </td>
+                </tr>
+            </t>
+        </table>
+    </template>
+
+</odoo>

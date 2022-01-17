@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="assets_common" name="cap_maintenance report" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+             <link rel='stylesheet' type="text/css" href="/cap_maintenance/static/src/css/report.css"/>
+        </xpath>
+    </template>
+
+    <!-- Puissance -->
+    <template id="report_detailed_work_done_puissance_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="obj">
+                <t t-call="cap_maintenance.external_layout_report">
+                    <t t-set="detailed_work_done_id" t-value="obj"/>
+                    <t t-set="maintenance_request_id" t-value="obj.maintenance_request_id"/>
+
+                    <!-- TITLE -->
+                    <h1 class="cap_centered" style="margin-top: 50px; margin-bottom: 50px;"><span t-field="detailed_work_done_id.report_title"/></h1>
+
+                    <!-- BODY -->
+                    <div style="width:auto;margin-left:0px;margin-right:0px">
+
+                        <!--   INTERVENTION  -->
+                        <t t-call="cap_maintenance.report_detailed_work_done_intervention_part"/>
+                        <br />
+
+                        <!--   EQUIPMENT  -->
+                        <table class="cap_table cap_bold_border extend cap_5_col force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field" colspan="5"><span class="cap_section">Equipment</span></td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Serial # of the unit</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id"  t-field="maintenance_request_id.equipment_id.name" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Voltage level (kV)</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_voltage" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Power (MVA)</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_puissance" />
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.puissance_puissance_unit" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="cap_field">Vendor</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id" t-field="maintenance_request_id.equipment_id.partner_id" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="cap_field">Manufacturing Year</td>
+                                <td colspan="4">
+                                    <span t-if="maintenance_request_id.equipment_id and maintenance_request_id.equipment_id.commissioning_year"
+                                          t-field="maintenance_request_id.equipment_id.commissioning_year" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- SOMMAIRE -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_section cap_border">1. Summary</td>
+                            </tr>
+                            <tr><td class="cap_section cap_summary_line">1. Summary</td></tr>
+                            <tr><td class="cap_section cap_summary_line">2. Work To Be Done</td></tr>
+                            <tr><td class="cap_section cap_summary_line">3. Work Done</td></tr>
+                            <tr><td class="cap_section cap_summary_line">4. Corrective Work To Plan</td></tr>
+                            <tr><td class="cap_section cap_summary_line">5. Preventive Work To Plan</td></tr>
+                            <tr><td class="cap_section cap_summary_line">6. Notes</td></tr>
+                        </table>
+
+
+                        <!--   WORK DESCRIPTION  -->
+                        <br />
+                        <table class="cap_table cap_bold_border extend force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">2. Work To Be Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-raw="detailed_work_done_id.work_description" class="safe_html" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Travaux réalisés : section 1 -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">3. Work Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>Photo plaque signalétique transformateur et régleur sous charge</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.work_done_section_1_image">
+                                    <span t-field="detailed_work_done_id.work_done_section_1_image" t-options="{'widget': 'image'}" />
+                                </td>
+                                <td t-else="">-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="detailed_work_done_id.work_done_section_1_note" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Travaux réalisés : section 2 -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">3. Work Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>Photo des mâts de mise à terre côté BT et HT</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.work_done_section_2_image">
+                                    <span t-field="detailed_work_done_id.work_done_section_2_image" t-options="{'widget': 'image'}" />
+                                </td>
+                                <td t-else="">-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="detailed_work_done_id.work_done_section_2_note" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Travaux réalisés : section 3 -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">3. Work Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>Photo installation chantier (outillage, citerne, bac rétention etc…)</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.work_done_section_3_image">
+                                    <span t-field="detailed_work_done_id.work_done_section_3_image" t-options="{'widget': 'image'}" />
+                                </td>
+                                <td t-else="">-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="detailed_work_done_id.work_done_section_3_note" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Travaux réalisés : section 4 -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">3. Work Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>Photo Remplissage transformateur ou régleur sous charge</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.work_done_section_4_image">
+                                    <span t-field="detailed_work_done_id.work_done_section_4_image" t-options="{'widget': 'image'}" />
+                                </td>
+                                <td t-else="">-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="detailed_work_done_id.work_done_section_4_note" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Travaux réalisés : section 5 -->
+                        <br />
+                        <table class="cap_table cap_bold_border force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">3. Work Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>Traitement d’huile du transformateur et niveau d’huile transformateur et régleur</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.work_done_section_5_image">
+                                    <span t-field="detailed_work_done_id.work_done_section_5_image" t-options="{'widget': 'image'}" />
+                                </td>
+                                <td t-else="">-</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="detailed_work_done_id.work_done_section_5_note" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!--   ACTIONS CORRECTIVES A PREVOIR  -->
+                        <br />
+                        <table class="cap_table cap_bold_border extend force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">4. Corrective Work To Plan</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-raw="detailed_work_done_id.corrective_work_to_plan" class="safe_html" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!--   ACTIONS PREVENTIVES A PREVOIR  -->
+                        <br />
+                        <table class="cap_table cap_bold_border extend force_split" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">5. Preventive Work To Plan</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-raw="detailed_work_done_id.preventive_work_to_plan" class="safe_html" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!--   REMARQUES  -->
+                        <br />
+                        <table class="cap_table cap_bold_border extend" style="width: 100%;">
+                            <tr class="colored_background">
+                                <td class="cap_field"><span class="cap_section">6. Notes</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-raw="detailed_work_done_id.note" class="safe_html" />
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <!--   SIGNATURES  -->
+                        <br/>
+                        <table class="cap_table cap_bold_border" style="width: 100%;">
+                            <tr>
+                                <td t-if="detailed_work_done_id.is_customer_signature_required" class="cap_field">Customer Signature</td>
+                                <td class="cap_field">Worker Signature</td>
+                            </tr>
+                            <tr>
+                                <td t-if="detailed_work_done_id.is_customer_signature_required">
+                                    <span t-field="detailed_work_done_id.customer_signature" t-options="{'widget': 'image'}"/>
+                                </td>
+                                <td>
+                                    <span t-field="detailed_work_done_id.worker_signature" t-options="{'widget': 'image'}"/>
+                                </td>
+                            </tr>
+
+                        </table>
+
+
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+        string="Maintenance Detailed Work Done Report"
+        id="action_print_detailed_work_done_report_puissance"
+        model="maintenance.detailed.report.work.done"
+        report_type="qweb-pdf"
+        name="cap_maintenance.report_detailed_work_done_puissance_document"
+        file="cap_maintenance.report_detailed_work_done_puissance_document"
+        print_report_name="'Maintenance Detailed Work Done Report'"
+        paperformat="cap_paperformat_maintenance_detailed_work_done"
+    />
+</odoo>

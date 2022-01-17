@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="res.company" id="cap_settings.company_tosa">
+        <field name="maintenance_request_sequence_id" ref="cap_maintenance.seq_tosa_company_request_num"/>
+    </record>
+
+    <record model="res.company" id="cap_settings.company_traction">
+        <field name="maintenance_request_sequence_id" ref="cap_maintenance.seq_traction_company_request_num"/>
+    </record>
+
+    <record model="res.company" id="cap_settings.company_puissance">
+        <field name="maintenance_request_sequence_id" ref="cap_maintenance.seq_puissance_company_request_num"/>
+    </record>
+
+</odoo>

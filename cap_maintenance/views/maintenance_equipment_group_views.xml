@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for equipement group -->
+    <record id="maintenance_equipment_group_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_equipment_group_view_tree_01</field>
+        <field name="model">maintenance.equipment.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for equipement group -->
+    <record id="maintenance_equipment_group_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_equipment_group_view_form_01</field>
+        <field name="model">maintenance.equipment.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="company_id" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_maintenance_equipement_group_tree">
+        <field name="name">maintenance.equipment.group</field>
+        <field name="res_model">maintenance.equipment.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_equipement_group_tree"
+        name="Equipment Groups"
+        parent="maintenance.menu_maintenance_configuration"
+        groups="maintenance.group_equipment_manager"
+        action="action_maintenance_equipement_group_tree"
+        sequence="30"/>
+
+</odoo>

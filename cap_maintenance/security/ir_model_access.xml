@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.model.access" id="maintenance_request_type_access_01">
+        <field name="name">maintenance_request_type_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.request.type')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_timesheet_access_01">
+        <field name="name">maintenance_timesheet_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.timesheet')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_timesheet_line_access_01">
+        <field name="name">maintenance_timesheet_line_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.timesheet.line')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_equipment_group_access_01">
+        <field name="name">maintenance_equipment_group_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.equipment.group')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_equipment_subgroup_access_01">
+        <field name="name">maintenance_equipment_subgroup_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.equipment.subgroup')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_expense_access_01">
+        <field name="name">maintenance_expense_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.expense')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_travel_access_01">
+        <field name="name">maintenance_travel_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.travel')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_generic_list_access_01">
+        <field name="name">maintenance_generic_list_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.generic.list')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_consignment_access_01">
+        <field name="name">maintenance_consignment_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.consignment')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="attachment_picture_access_01">
+        <field name="name">attachment_picture_access_01</field>
+        <field name="model_id" search="[('model', '=', 'attachment.picture')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_tool_access_01">
+        <field name="name">maintenance_tool_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.tool')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_detailed_report_work_done_access_01">
+        <field name="name">maintenance_detailed_report_work_done_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.detailed.report.work.done')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_corrective_work_done_traction_access_01">
+        <field name="name">maintenance_corrective_work_done_traction_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.corrective.work.done.traction')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.model.access" id="maintenance_accessories_used_done_access_01">
+        <field name="name">maintenance_accessories_used_done_access_01</field>
+        <field name="model_id" search="[('model', '=', 'maintenance.accessories.used')]" model="ir.model"/>
+        <field name="group_id" eval="False"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="active" eval="True"/>
+    </record>
+
+</odoo>

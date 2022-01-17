@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="worker_preparation_mail_template" model="mail.template">
+        <field name="name">Maintenance Request - Worker Preparation</field>
+        <field name="subject">${object.build_report_name()}</field>
+        <field name="email_from">${object.manager_id.partner_id.email | safe}</field>
+        <field name="partner_to">${object.mailing_list_preparation_partner_ids.get_emails() | safe}</field>
+        <field name="body_html" type="xml">
+            <p>Hello,<br/>
+                <br/>
+                You have been assigned to <a href="/web#model=maintenance.request&amp;id=${object.id}&amp;view_type=form&amp;action=${object.env.ref('maintenance.hr_equipment_request_action').id}" target="_blank"><b>${object.name}</b></a>.<br/>
+                <br/>
+                Please find details below :<br/>
+                <br/>
+                % if object.maintenance_travel_ids :
+                <p>
+                    <h4>Travel arrangements</h4>
+                    % for travel in object.maintenance_travel_ids:
+                    <ul>
+                        <li>
+                            Travel #${loop.index}
+                            <ul>
+                                % if travel.is_hotel :
+                                    <li>
+                                        <u>Hotel</u><br/>
+                                        Booked from ${travel.hotel_date_from} to ${travel.hotel_date_to}.<br/>
+                                        ${travel.hotel_additional_info}
+                                    </li>
+                                % endif
+                                % if travel.is_company_car or travel.is_chsec or travel.is_car_rental :
+                                    <li>
+                                        <u>Car</u><br/>
+                                        % if travel.is_company_car :
+                                            Company Car<br/>
+                                        % endif
+                                        % if travel.is_chsec :
+                                            CHSEC<br/>
+                                        % endif
+                                        % if travel.is_car_rental :
+                                            Car Rental<br/>
+                                        % endif
+                                        From ${travel.car_date_from} To ${travel.car_date_to}.<br/>
+                                        ${travel.car_additional_info}
+                                    </li>
+                                % endif
+                                % if travel.is_flight :
+                                    <li>
+                                        <u>Flight</u><br/>
+                                        Departure : ${travel.flight_date_to_destination}<br/>
+                                        Return flight : ${travel.flight_date_return}<br/>
+                                        ${travel.flight_additional_info}
+                                    </li>
+                                % endif
+                                % if travel.trip_additionnal_info :
+                                    <li>
+                                        <u>Additionnal information</u><br/>
+                                        ${travel.trip_additionnal_info}
+                                    </li>
+                                % endif
+                                % if travel.has_attachment :
+                                    <li>
+                                        <u>File(s)</u><br/>
+                                        <ul>
+                                        % for attachment in travel.attachment_ids :
+                                            % set void = attachment.sudo().generate_access_token()
+                                            <li><a href="/web/content/${attachment.id}?access_token=${attachment.access_token}" target="_blank">${attachment.name}</a></li>
+                                        % endfor
+                                        </ul>
+                                    </li>
+                                % endif
+
+                                <style>
+                                    .cap_style table, .cap_style tr {
+                                        padding: 10px;
+                                        border: 1px solid rgba(108, 117, 125, 0.3);
+                                        border-collapse: collapse;
+                                    }
+                                    .cap_style thead {
+                                        background-color: #875A7B;
+                                        color: white;
+                                    }
+                                    .cap_style th {
+                                        min-width: 100px;
+                                        text-align:center;
+                                    }
+                                </style>
+
+
+                                % set tool_ids = travel.find_all_tools()
+                                % if tool_ids :
+                                <li>
+                                    <u>Tools</u>
+                                    <table class="cap_style">
+                                            <thead class="cap_style">
+                                                <tr class="cap_style">
+                                                    <th class="cap_style" style="width: 20%;">Name</th>
+                                                    <th class="cap_style" style="width: 10%;">Quantity</th>
+                                                    <th class="cap_style" style="width: 10%;">Delivery On Site</th>
+                                                    <th class="cap_style" style="width: 10%;">Assignment</th>
+                                                    <th class="cap_style" style="width: 25%;">Note</th>
+                                                    <th class="cap_style" style="width: 25%;">Files</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                % for tool in tool_ids:
+                                                    <tr class="cap_style">
+                                                        <td>${tool.name}</td>
+                                                        <td style="text-align:center;">${tool.quantity}</td>
+                                                        <td style="text-align:center;">
+                                                            % if tool.is_delivery_on_site :
+                                                               <input type="checkbox" checked="checked" disabled="disabled" />
+                                                            % else :
+                                                                <input type="checkbox" disabled="disabled" />
+                                                            % endif
+                                                        </td>
+                                                        <td>${tool.assignment}</td>
+                                                        <td>${tool.note}</td>
+                                                        <td>
+                                                            % if tool.has_attachment :
+                                                                % for attachment in tool.attachment_ids :
+                                                                    % set void = attachment.sudo().generate_access_token()
+                                                                    <a href="/web/content/${attachment.id}?access_token=${attachment.access_token}" target="_blank">${attachment.name}</a><br/>
+                                                                % endfor
+                                                            % endif
+                                                        </td>
+                                                    </tr>
+                                                % endfor
+                                        </tbody>
+                                    </table>
+                                </li>
+                                % endif
+
+                                % set spare_parts_ids = travel.find_all_spare_parts()
+                                % if spare_parts_ids :
+                                <li>
+                                    <u>Spare Parts</u>
+                                    <table class="cap_style">
+                                            <thead class="cap_style">
+                                                <tr class="cap_style">
+                                                    <th class="cap_style" style="width: 20%;">Name<br/>(Reference)</th>
+                                                    <th class="cap_style" style="width: 10%;">Quantity</th>
+                                                    <th class="cap_style" style="width: 10%;">Delivery On Site</th>
+                                                    <th class="cap_style" style="width: 10%;">Assignment</th>
+                                                    <th class="cap_style" style="width: 25%;">Note</th>
+                                                    <th class="cap_style" style="width: 25%;">Files</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                % for spare_part in spare_parts_ids:
+                                                    <tr class="cap_style">
+                                                        <td>${spare_part.name}<br/>(${spare_part.reference})</td>
+                                                        <td style="text-align:center;">${spare_part.quantity}</td>
+                                                        <td style="text-align:center;">
+                                                            % if spare_part.is_delivery_on_site :
+                                                               <input type="checkbox" checked="checked" disabled="disabled" />
+                                                            % else :
+                                                                <input type="checkbox" disabled="disabled" />
+                                                            % endif
+                                                        </td>
+                                                        <td>${spare_part.assignment}</td>
+                                                        <td>${spare_part.note}</td>
+                                                        <td>
+                                                            % if spare_part.has_attachment :
+                                                                % for attachment in spare_part.attachment_ids :
+                                                                    % set void = attachment.sudo().generate_access_token()
+                                                                    <a href="/web/content/${attachment.id}?access_token=${attachment.access_token}" target="_blank">${attachment.name}</a><br/>
+                                                                % endfor
+                                                            % endif
+                                                        </td>
+                                                    </tr>
+                                                % endfor
+                                        </tbody>
+                                    </table>
+                                </li>
+                                % endif
+                            </ul>
+                        </li>
+                    </ul>
+                    % endfor
+                </p>
+                % endif
+                <br/>
+                Regards,<br/>
+                <br/>
+                Recipient List:<br/>
+                % for partner_id in object.mailing_list_preparation_partner_ids:
+                    % if partner_id.email
+                        ${partner_id.email}<br/>
+                    % endif
+                % endfor
+            </p>
+        </field>
+        <field name="model_id" ref="cap_maintenance.model_maintenance_request"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="customer_maintenance_timesheet_mail_template" model="mail.template">
+        <field name="name">Maintenance - Customer Timesheet</field>
+        <field name="subject">${object.build_report_name()}</field>
+        <field name="email_from">${object.worker_id.email | safe}</field>
+        <field name="partner_to">${object.maintenance_request_id.mailing_list_work_report_partner_ids.get_emails() | safe}</field>
+        <field name="body_html" type="xml">
+            <p>
+                Hello,<br/>
+                <br/>
+                Please find attached timesheet.<br/>
+                <br/>
+                Regards,<br/>
+                <br/>
+                Recipient List:<br/>
+                % for partner_id in object.maintenance_request_id.mailing_list_work_report_partner_ids:
+                    % if partner_id.email
+                        ${partner_id.email}<br/>
+                    % endif
+                % endfor
+            </p>
+        </field>
+        <field name="model_id" ref="cap_maintenance.model_maintenance_timesheet"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="internal_maintenance_timesheet_mail_template" model="mail.template">
+        <field name="name">Maintenance - Internal Timesheet</field>
+        <field name="subject">${object.build_report_name()}</field>
+        <field name="email_from">${object.worker_id.email | safe}</field>
+        <field name="partner_to">${object.internal_maintenance_request_id.mailing_list_payment_partner_ids.get_emails() | safe}</field>
+        <field name="body_html" type="xml">
+            <p>
+                Hello,<br/>
+                <br/>
+                Please find attached internal timesheet.<br/>
+                <br/>
+                Regards,<br/>
+                <br/>
+                Recipient List:<br/>
+                % for partner_id in object.internal_maintenance_request_id.mailing_list_payment_partner_ids:
+                    % if partner_id.email
+                        ${partner_id.email}<br/>
+                    % endif
+                % endfor
+            </p>
+        </field>
+        <field name="model_id" ref="cap_maintenance.model_maintenance_timesheet"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="detailed_report_work_done_mail_template" model="mail.template">
+        <field name="name">Maintenance - Work and instruction report</field>
+        <field name="subject">${object.build_report_name()}</field>
+        <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+        <field name="partner_to">${object.maintenance_request_id.mailing_list_final_report_partner_ids.get_emails() | safe}</field>
+        <field name="body_html" type="xml">
+            <p>
+                Hello,<br/>
+                <br/>
+                Please find attached report for intervention ${object.maintenance_request_id.company_request_num}.<br/>
+                <br/>
+                Regards,<br/>
+                <br/>
+                Recipient List:<br/>
+                % for partner_id in object.maintenance_request_id.mailing_list_final_report_partner_ids:
+                    % if partner_id.email
+                        ${partner_id.email}<br/>
+                    % endif
+                % endfor
+            </p>
+        </field>
+        <field name="model_id" ref="cap_maintenance.model_maintenance_detailed_report_work_done"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>

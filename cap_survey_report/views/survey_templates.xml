@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="survey_assets" inherit_id="survey.survey_assets" name="Survey assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/cap_survey_report/static/src/js/survey.js" />
+            <link href="/cap_survey_report/static/src/css/custom.css" rel="stylesheet" type="text/css"/>
+
+            <script type="text/javascript" src="/cap_survey_report/static/lib/js/jSignature.js" />
+            <script type="text/javascript" src="/cap_survey_report/static/src/js/signature.js"/>
+        </xpath>
+    </template>
+
+    <template id="view_sign_field" name="Signature Field">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-signature">
+                    <div class="panel-body">
+                        <img alt="Signature" t-att-name="prefix" style="width: 100%;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="sign_field" name="Signature Field">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-signature">
+                    <div class="panel-heading nav">
+                        <div class="pull-right">
+                            <!--<button type="button" class="btn btn-success js_set_signature">Set</button>-->
+                            <button type="button" class="btn btn-danger js_reset_signature">Reset</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <input type="hidden" alt="img" t-att-name="prefix" style="display: none;"/>
+                        <div class="signature"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="attachment_field" name="Attachment field">
+        <input type="file" class="form-control" t-att-name="prefix"/>
+    </template>
+
+    <template id="view_attachment_field" name="Attachment Field">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default panel-signature">
+                    <div class="panel-body">
+                        <img alt="Attachment" t-att-name="prefix" style="width: 100%; display: none;"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Add To Survey Print -->
+    <template id="survey_print_inherited" inherit_id="survey.survey_print" name="Survey Print">
+        <xpath expr="//div[hasclass('js_question-wrapper')]//h2" position="replace">
+            <h4>
+                <span t-field='question.question' />
+                <span t-if="question.constr_mandatory" class="text-danger">*</span>
+            </h4>
+        </xpath>
+        <xpath expr="//div[hasclass('js_errzone')]" position="before">
+            <t t-if="question.question_type == 'sign'">
+                <t t-call="cap_survey_report.view_sign_field"/>
+            </t>
+            <t t-if="question.question_type == 'attachment'">
+                <t t-call="cap_survey_report.view_attachment_field"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="survey_question_inherited" inherit_id="survey.question" name="Survey Question: Add Fields">
+          <xpath expr="//div[hasclass('text-muted','oe_no_empty')]" position="replace">
+            <t t-if="question.description">
+                <div t-field='question.description' class="text-muted oe_no_empty"/>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[hasclass('js_errzone')]" position="before">
+            <t t-if="question.question_type == 'sign'">
+                <t t-call="cap_survey_report.sign_field"/>
+            </t>
+            <t t-if="question.question_type == 'attachment'">
+                <t t-call="cap_survey_report.attachment_field"/>
+            </t>
+        </xpath>
+    </template>
+
+    </data>
+</odoo>

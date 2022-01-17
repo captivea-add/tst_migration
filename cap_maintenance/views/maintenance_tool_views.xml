@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for the tools -->
+    <record id="maintenance_tool_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_tool_view_tree_01</field>
+        <field name="model">maintenance.tool</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="is_delivery_on_site" />
+                <field name="quantity" />
+                <field name="note" />
+                <field name="assignment" />
+                <field name="maintenance_travel_id" options="{'no_create': True}"/>
+                <field name="has_attachment" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for the tools -->
+    <record id="maintenance_tool_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_tool_view_form_01</field>
+        <field name="model">maintenance.tool</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="is_delivery_on_site" />
+                        <field name="quantity" />
+                        <field name="note" />
+                        <field name="assignment" />
+                        <field name="maintenance_travel_id" options="{'no_create': True}"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE for the spare parts -->
+    <record id="maintenance_tool_view_tree_02" model="ir.ui.view">
+        <field name="name">maintenance_tool_view_tree_02</field>
+        <field name="model">maintenance.tool</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="reference" />
+                <field name="is_delivery_on_site" />
+                <field name="quantity" />
+                <field name="note" />
+                <field name="assignment" />
+                <field name="maintenance_travel_id" options="{'no_create': True}"/>
+                <field name="has_attachment" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for the spare parts -->
+    <record id="maintenance_tool_view_form_02" model="ir.ui.view">
+        <field name="name">maintenance_tool_view_form_02</field>
+        <field name="model">maintenance.tool</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="reference" />
+                        <field name="is_delivery_on_site" />
+                        <field name="quantity" />
+                        <field name="note" />
+                        <field name="assignment" />
+                        <field name="maintenance_travel_id" options="{'no_create': True}"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_maintenance_tool">
+        <field name="name">Tools</field>
+        <field name="res_model">maintenance.tool</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="maintenance_tool_view_tree_01"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_empty_folder">
+            Nothing registered yet.
+          </p>
+        </field>
+    </record>
+</odoo>

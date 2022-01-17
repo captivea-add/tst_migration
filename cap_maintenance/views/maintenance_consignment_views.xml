@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- TREE for consignment -->
+    <record id="maintenance_consignment_view_tree_01" model="ir.ui.view">
+        <field name="name">maintenance_consignment_view_tree_01</field>
+        <field name="model">maintenance.consignment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="type"              width="0.5"/>
+                <field name="has_attachment"    width="0.5"/>
+                <field name="create_date"    width="0.5" string="Create Date"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for consignment -->
+    <record id="maintenance_consignment_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_consignment_view_form_01</field>
+        <field name="model">maintenance.consignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="response_id"                           invisible="1" force_save="1"/>
+                    <field name="response_line_ids"                     invisible="1" />
+                    <field name="response_state"                        invisible="1" />
+                    <field name="maintenance_request_id"                invisible="1" />
+                    <field name="takefive_maintenance_request_id"       invisible="1" />
+                    <field name="deconsignment_maintenance_request_id"  invisible="1" />
+                    <group>
+                        <field name="type"/>
+                        <field name="picture" widget="image" filename="picture_name" attrs="{'invisible': ['|',('type', '!=', 'customer'), ('attachment_ids', '!=', [])]}"/>
+                        <field name="picture_name" readonly="1" force_save="1" invisible="1"/>
+
+                        <field name="survey_id" force_save="1" attrs="{'invisible': [('type', '!=', 'abb')]}" />
+                        <label for="survey_id" string="" attrs="{'invisible': ['|', ('type', '!=', 'abb'), ('response_state', '=', 'done')]}"/>
+                        <button name="action_start_survey" string="Fill" type="object" class="btn-primary" attrs="{'invisible': ['|', ('type', '!=', 'abb'), ('response_state', '=', 'done')]}"/>
+                        </group>
+                    <group>
+                        <group>
+                            <field name="attachment_ids" widget="many2many_binary"
+                                   attrs="{'readonly': [('type', '=', 'abb'), ('response_state', '=', 'done')], 'invisible': [('type', '!=', 'customer'), ('attachment_ids', '=', [])]}"/></group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

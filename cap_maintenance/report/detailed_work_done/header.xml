@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="external_layout_report">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header">
+            <table class="cap_table cap_border extend" style="width:100%;">
+                <tr style="height: 30px;">
+                    <td class="cap_centered" style="width: 21%;vertical-align: middle;" rowspan="2">
+                        <span t-if="maintenance_request_id.company_id" t-field="maintenance_request_id.company_id.logo"
+                              t-options="{'widget': 'image', 'style': 'max-height: 50px;'}"/>
+                    </td>
+                    <td colspan="2">Project : <span t-field="maintenance_request_id.sap_assignment_num"/></td>
+                    <td colspan="1">Date : <span t-esc="detailed_work_done_id.report_date" t-options="{'widget': 'date'}" /></td>
+                    <td colspan="2">Prepared By : <span t-field="detailed_work_done_id.author" t-options='{"widget": "contact", "fields": ["name"], "no_marker": True}'/></td>
+                </tr>
+                <tr style="height: 30px;">
+                    <td colspan="2">Title :  <span t-field="detailed_work_done_id.report_title"/></td>
+                    <td colspan="1">Doc N° : <span style="font-size: smaller;" t-field="detailed_work_done_id.document_num"/></td>
+                    <td colspan="2">Rev. : <span t-field="detailed_work_done_id.document_revision"/></td>
+                </tr>
+            </table>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <!-- using the list-inline-item class from bootstrap causes weird behaviours in pdf report
+                         adding d-inline class fixes the problem-->
+                    <li t-if="company.phone" class="list-inline-item d-inline">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item d-inline">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item d-inline">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul>
+
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+</odoo>

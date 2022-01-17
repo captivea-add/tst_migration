@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_maintenance_timesheet_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="obj">
+                <t t-call="cap_maintenance.timesheet_external_layout_report">
+                    
+                    <t t-set="request" t-value="obj.internal_maintenance_request_id or obj.maintenance_request_id"/>
+
+                    <style type="text/css">
+                        table{
+                            border:1px solid black;
+                            padding:-15px;
+                        }
+                        td,th {
+                            border : solid 1px black;
+                            padding-left : 5px;
+                        }
+                        .td_noborder {
+                            border : 0px;
+                        }
+                        .td_padding{
+                            padding : 15px;
+                        }
+
+                        .h5_shut_margintop{
+                            padding-top : -15px !important;
+                            margin-top : -15px !important;
+                        }
+                        .cap_field {
+                            font-weight: bold;
+                        }
+
+                        .cap_table {
+                            table-layout: fixed;
+                            page-break-inside: avoid; /* used by wkhtmltopdf */
+                        }
+
+                        .cap_bold_border { border: 2px black solid; }
+                    </style>
+                    <div style="width:auto;margin-left:0px;margin-right:0px">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="padding-bottom: 10px;">
+                                    <div t-field="request.company_id.logo"
+                                          t-options="{'widget': 'image','style':'max-width: 200px;max-height: 200px'}"/></td>
+
+                                <td class="td_noborder">
+                                    <span t-field="request.company_id.partner_id" style="line-height: 15px"
+                                          t-options="{'widget': 'contact', 'fields': ['address', 'phone'], 'no_marker': True}"/></td>
+
+                                <td class="td_noborder" colspan="4">
+                                    <h5 class="h5_shut_margintop"><b>Rapport de Montage N°</b> <span t-field="request.company_request_num"/></h5></td>
+                            </tr>
+
+                            <tr>
+                                <td>Nom du client <br/>
+                                    <span t-field="request.working_location_partner_id.name"/></td>
+
+                                <td>Lieu <br/>
+                                    <span t-field="request.working_location"/></td>
+
+                                <td colspan="3" rowspan="2">Imputation SAP<br/>
+                                    <span t-field="request.sap_assignment_num"/></td>
+
+                                <td>Matricule<br/>
+                                    <span t-field="obj.worker_id.matricule"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="width:60%">Travail effectué (Type de produit, n° de transfo,...):<br/>
+                                    <span t-field="request.equipment_id.name"/></td>
+
+                                <td rowspan="2">Nom/Prénom <br/>
+                                    <span t-field="obj.worker_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Période (jour/mois/année) du  <span t-field="request.schedule_date"  t-options='{"format": "MM/dd/yyyy"}'/>
+                                    au <span t-field="request.end_date"  t-options='{"format": "MM/dd/yyyy"}'/></td>
+
+                                <td>Travaux terminé</td><td>Oui : </td><td>Non :</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                    <br/>
+                    <h4 class="text-center">Heures effectuées</h4>
+                    <div style="page-break-after:always;">
+                        <div class="">
+                            <table class="">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Total des heures</th>
+                                        <th>Heures normales</th>
+                                        <th>Temps de voyage</th>
+                                        <th>Heures d'attentes et de préparation</th>
+                                        <th>Heures supplémentaires 06h00 - 23h00</th>
+                                        <th>Heures de nuit 23h00 - 06h00</th>
+                                        <th>Heures supplémentaires de nuit ou heures travail dimanches et jour fériés</th>
+                                        <th>km</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_hours" t-value="0"/>
+                                    <t t-set="total_regular_hours" t-value="0"/>
+                                    <t t-set="total_travelling_hours" t-value="0"/>
+                                    <t t-set="total_waiting_hours" t-value="0"/>
+                                    <t t-set="total_extra_hours" t-value="0"/>
+                                    <t t-set="total_night_hours" t-value="0"/>
+                                    <t t-set="total_extra_night_and_holiday_hours" t-value="0"/>
+                                    <t t-foreach="obj.timesheet_line_ids" t-as="line">
+                                        <tr class="border-black">
+                                            <td class="border-right"><span t-field="line.sequence" /></td>
+                                            <td>
+                                                <span t-if="line.total_hours > 0"  t-field="line.total_hours" />
+                                                <span t-else="" ></span>
+                                            </td>
+                                            <td><span t-field="line.regular_hours" /></td>
+                                            <td><span t-field="line.travelling_hours" /></td>
+                                            <td><span t-field="line.waiting_hours" /></td>
+                                            <td><span t-field="line.extra_hours" /></td>
+                                            <td><span t-field="line.night_hours" /></td>
+                                            <td><span t-field="line.extra_night_and_holiday_hours" /></td>
+                                            <td></td>
+                                        </tr>
+                                    <t t-set="total_hours"                          t-value="total_hours + line.total_hours"/>
+                                    <t t-set="total_regular_hours"                  t-value="total_regular_hours + line.regular_hours"/>
+                                    <t t-set="total_travelling_hours"               t-value="total_travelling_hours + line.travelling_hours"/>
+                                    <t t-set="total_waiting_hours"                  t-value="total_waiting_hours + line.waiting_hours"/>
+                                    <t t-set="total_extra_hours"                    t-value="total_extra_hours + line.extra_hours"/>
+                                    <t t-set="total_night_hours"                    t-value="total_night_hours + line.night_hours"/>
+                                    <t t-set="total_extra_night_and_holiday_hours"  t-value="total_extra_night_and_holiday_hours + line.extra_night_and_holiday_hours"/>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="">
+                            <div style="margin-bottom: 10px;"><span class="cap_field">Extra Hours:</span> <span t-field="obj.extra_hours_management"/></div>
+                            <table class="">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Total <br/>des heures</th>
+                                        <th>Total <br/>Heures normales (100%)</th>
+                                        <th>Total <br/>Temps de voyage (100%)</th>
+                                        <th>Total <br/>Heures d'attentes et de préparation (100%)</th>
+                                        <th>Total <br/>Heures supplémentaires 06h00 - 23h00 (125%)</th>
+                                        <th>Total <br/>Heures de nuit 23h00 - 06h00 (150%)</th>
+                                        <th>Total <br/>Heures supplémentaires de nuit ou heures travail dimanches et jour fériés (150%)</th>
+                                        <th>Total <br/>km</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-black">
+                                        <td colspan="2"><span t-esc="total_hours" /></td>
+                                        <td><span t-esc="total_regular_hours" /></td>
+                                        <td><span t-esc="total_travelling_hours" /></td>
+                                        <td><span t-esc="total_waiting_hours" /></td>
+                                        <td><span t-esc="total_extra_hours" /></td>
+                                        <td><span t-esc="total_night_hours" /></td>
+                                        <td><span t-esc="total_extra_night_and_holiday_hours" /></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <t t-if="obj.timesheet_type == 'internal'">
+                        <p style="page-break-after:always;"></p>
+
+                        <div class="row">
+                            <div class="col-7">
+                                <h4>Indémnités de Déplacement</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Nb Jour</th>
+                                            <th>Montant/Jour</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Repas de midi (forfait)</td>
+                                            <td><span t-field="obj.lunch_allowance_days"/></td>
+                                            <td><span t-field="obj.lunch_allowance_amount"/></td>
+                                            <td><span t-field="obj.lunch_allowance_total_amount"/></td></tr>
+                                        <tr><td>Repas du soir (forfait)</td>
+                                            <td><span t-field="obj.diner_allowance_days"/></td>
+                                            <td><span t-field="obj.diner_allowance_amount"/></td>
+                                            <td><span t-field="obj.diner_allowance_total_amount"/></td></tr>
+                                        <tr><td>Nuitée (forfait ou justificatifs annexés)</td>
+                                            <td><span t-field="obj.night_allowance_days"/></td>
+                                            <td><span t-field="obj.night_allowance_amount"/></td>
+                                            <td><span t-field="obj.night_allowance_total_amount"/></td></tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <h4>Indémnités spéciales</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Nb Jour</th>
+                                            <th>Montant/Jour</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Primes de travaux difficiles</td>
+                                            <td><span t-field="obj.hard_work_bonus_days"/></td>
+                                            <td><span t-field="obj.hard_work_bonus_amount"/></td>
+                                            <td><span t-field="obj.hard_work_bonus_total_amount"/></td></tr>
+                                        <tr><td>Supplément par pays</td>
+                                            <td><span t-field="obj.other_country_bonus_days"/></td>
+                                            <td><span t-field="obj.other_country_bonus_amount"/></td>
+                                            <td><span t-field="obj.other_country_bonus_total_amount"/></td></tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="col-5">
+                                <h4>Dépenses</h4>
+                                <table style="width:100%;">
+                                    <tr><td>Indemnité kilométrique</td>
+                                        <td><span t-field="obj.allowance_per_km"/></td></tr>
+                                    <tr><td>Total Kms</td>
+                                        <td><span t-field="obj.total_kms"/></td></tr>
+                                    <tr><td>Montant</td>
+                                        <td><span t-field="obj.allowance_total_kms_amount"/></td></tr>
+                                </table>
+
+                                <table style="width:100%;margin-top:25px">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Montant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="obj.maintenance_expense_ids" t-as="line">
+                                            <tr><td><span t-field="line.description"/></td>
+                                                <td><span t-field="line.amount"/></td></tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+
+                    <!--   SIGNATURES  -->
+                    <br/>
+                    <table class="cap_table cap_bold_border" style="width: 100%;page-break-after:always;">
+                        <tr>
+                            <td t-if="obj.timesheet_type == 'customer'" class="cap_field td_noborder">Customer Signature</td>
+                            <td class="cap_field td_noborder">Worker Signature</td>
+                            <td t-if="obj.timesheet_type == 'internal'" class="cap_field td_noborder">Supervisor Signature</td>
+                        </tr>
+                        <tr>
+                            <td t-if="obj.timesheet_type == 'customer'" class="td_noborder">
+                                <span t-field="obj.customer_signature" t-options="{'widget': 'image'}"/>
+                                <div t-field="obj.customer_display_name" class="text-center" />
+                            </td>
+                            <td class="td_noborder">
+                                <span t-field="obj.worker_signature" t-options="{'widget': 'image'}"/>
+                            </td>
+                            <td t-if="obj.timesheet_type == 'internal'" class="td_noborder">
+                                <span t-field="obj.supervisor_signature" t-options="{'widget': 'image'}"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <p t-if="obj.timesheet_type == 'customer'">
+                        <span class="cap_field">Before Work Photos</span><br/>
+                        <t t-foreach="obj.before_work_attachment_ids" t-as="picture_attachment_id">
+                            <div t-field="picture_attachment_id.picture" style="page-break-inside: avoid;" t-options="{'widget': 'image'}"/>
+                            <br/>
+                        </t>
+
+                        <span class="cap_field">Comments</span><br/>
+                        <div t-field="obj.comments"/>
+
+                        <span class="cap_field">After Work Photos</span><br/>
+                        <t t-foreach="obj.after_work_attachment_ids" t-as="picture_attachment_id">
+                            <div t-field="picture_attachment_id.picture" style="page-break-inside: avoid;" t-options="{'widget': 'image'}"/>
+                            <br/>
+                        </t>
+                    </p>
+                </t>
+            </t>
+         </t>
+    </template>
+
+    <report
+        string="Maintenance Timesheet report"
+        id="action_print_maintenance_timesheet_report"
+        model="maintenance.timesheet"
+        report_type="qweb-pdf"
+        name="cap_maintenance.report_maintenance_timesheet_document"
+        file="cap_maintenance.report_maintenance_timesheet_document"
+        print_report_name="'Maintenance Timesheet Report'"
+    />
+
+    <!-- Assign paperformat-->
+    <record id="cap_maintenance.action_print_maintenance_timesheet_report" model="ir.actions.report">
+        <field name="paperformat_id" ref="cap_maintenance.cap_paperformat_maintenance_timesheet" />
+    </record>
+
+</odoo>

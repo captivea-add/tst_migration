@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="maintenance.request.type" id="maintenance_request_type_sur_site_facturable">
+        <field name="name">Sur site facturable</field>
+    </record>
+    <record model="maintenance.request.type" id="maintenance_request_type_sur_site_garantie">
+        <field name="name">Sur site garantie</field>
+    </record>
+
+    <record model="maintenance.request.type" id="maintenance_request_type_en_usine_facturable">
+        <field name="name">En usine facturable</field>
+    </record>
+    <record model="maintenance.request.type" id="maintenance_request_type_en_usine_garantie">
+        <field name="name">En usine garantie</field>
+    </record>
+
+    <record model="maintenance.request.type" id="maintenance_request_type_distance_facturable">
+        <field name="name">Distance facturable</field>
+    </record>
+    <record model="maintenance.request.type" id="maintenance_request_type_distance_garantie">
+        <field name="name">Distance garantie</field>
+    </record>
+
+    <record model="maintenance.request.type" id="maintenance_request_type_envoi_piece">
+        <field name="name">Envoi pièce de rechange</field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- TREE for attachment picture -->
+    <record id="attachment_picture_view_tree_01" model="ir.ui.view">
+        <field name="name">attachment_picture_view_tree_01</field>
+        <field name="model">attachment.picture</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="picture" widget="image" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- FORM for attachment picture -->
+    <record id="attachment_picture_view_form_01" model="ir.ui.view">
+        <field name="name">attachment_picture_view_form_01</field>
+        <field name="model">attachment.picture</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="datetime" readonly="1" force_save="1" />
+                    <field name="picture" widget="image" filename="picture_name" />
+                    <field name="picture_name" readonly="1" force_save="1" attrs="{'invisible': [('picture', '=', False)]}"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

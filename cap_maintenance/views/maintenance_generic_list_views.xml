@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- FORM for accessories used -->
+    <record id="maintenance_generic_list_view_form_01" model="ir.ui.view">
+        <field name="name">maintenance_generic_list_view_form_01</field>
+        <field name="model">maintenance.generic.list</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="company_id" readonly="1"/>
+                            <field name="type" attrs="{'readonly': [('type', '!=', False)]}" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
